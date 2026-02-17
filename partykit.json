@@ -1,0 +1,5 @@
+{
+  "name": "madden-drinks",
+  "main": "party/server.ts",
+  "compatibilityDate": "2024-12-01"
+}
