@@ -23,7 +23,7 @@ export default function LeagueSetup({ players, dispatch }: Props) {
   }
 
   return (
-    <div className="max-w-md mx-auto px-4 pt-6 pb-24">
+    <div className="max-w-md md:max-w-2xl mx-auto px-4 pt-6 pb-24">
       <h2 className="font-display font-black text-4xl uppercase tracking-wide text-center mb-1 animate-slide-up text-text-primary">
         New League
       </h2>

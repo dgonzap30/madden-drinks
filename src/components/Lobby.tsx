@@ -65,7 +65,7 @@ export default function Lobby({ onJoin }: LobbyProps) {
 
   return (
     <div className="min-h-dvh flex items-center justify-center px-4">
-      <div className="max-w-sm w-full text-center">
+      <div className="max-w-sm md:max-w-md w-full text-center">
         {/* Title */}
         <div className="mb-8 animate-slide-up" style={{ animationDelay: '0ms' }}>
           <h1 className="text-5xl font-display font-black uppercase tracking-wide text-text-primary">

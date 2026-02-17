@@ -25,7 +25,7 @@ export default function PlayerProfileTab({ state, playerId, onBack }: Props) {
   const netDrinks = stats.netDrinks
 
   return (
-    <div className="max-w-md mx-auto px-4 pt-4 pb-24">
+    <div className="max-w-md md:max-w-2xl mx-auto px-4 pt-4 pb-24">
       {/* Back Button */}
       <button
         onClick={onBack}
@@ -62,30 +62,33 @@ export default function PlayerProfileTab({ state, playerId, onBack }: Props) {
         </div>
       </div>
 
-      {/* Drinks Stats */}
-      <div className="mb-5">
-        <h3 className="section-label mb-2">Drinks</h3>
-        <div className="card divide-y divide-border">
-          <StatRow label="Shots Owed" value={stats.drinksTaken} color="text-negative" />
-          <StatRow label="Shots Taken" value={stats.drinksConsumed} color="text-highlight" />
-          {stats.drinksPending > 0 && (
-            <StatRow label="Shots Pending" value={stats.drinksPending} color="text-negative" />
-          )}
-          <StatRow label="Shots Imposed" value={stats.drinksGiven} color="text-accent" />
-          {stats.mostDrinksInOneGame > 0 && (
-            <StatRow label="Most Shots (1 Game)" value={stats.mostDrinksInOneGame} color="text-highlight" />
-          )}
+      {/* Drinks + Performance side by side on desktop */}
+      <div className="md:grid md:grid-cols-2 md:gap-4">
+        {/* Drinks Stats */}
+        <div className="mb-5">
+          <h3 className="section-label mb-2">Drinks</h3>
+          <div className="card divide-y divide-border">
+            <StatRow label="Shots Owed" value={stats.drinksTaken} color="text-negative" />
+            <StatRow label="Shots Taken" value={stats.drinksConsumed} color="text-highlight" />
+            {stats.drinksPending > 0 && (
+              <StatRow label="Shots Pending" value={stats.drinksPending} color="text-negative" />
+            )}
+            <StatRow label="Shots Imposed" value={stats.drinksGiven} color="text-accent" />
+            {stats.mostDrinksInOneGame > 0 && (
+              <StatRow label="Most Shots (1 Game)" value={stats.mostDrinksInOneGame} color="text-highlight" />
+            )}
+          </div>
         </div>
-      </div>
 
-      {/* Performance Stats */}
-      <div className="mb-5">
-        <h3 className="section-label mb-2">Performance</h3>
-        <div className="card divide-y divide-border">
-          <StatRow label="Avg Pts Scored" value={stats.avgPointsScored.toFixed(1)} />
-          <StatRow label="Avg Pts Allowed" value={stats.avgPointsAllowed.toFixed(1)} />
-          <StatRow label="Longest Win Streak" value={stats.longestWinStreak} color="text-accent" />
-          <StatRow label="Longest Loss Streak" value={stats.longestLossStreak} color="text-negative" />
+        {/* Performance Stats */}
+        <div className="mb-5">
+          <h3 className="section-label mb-2">Performance</h3>
+          <div className="card divide-y divide-border">
+            <StatRow label="Avg Pts Scored" value={stats.avgPointsScored.toFixed(1)} />
+            <StatRow label="Avg Pts Allowed" value={stats.avgPointsAllowed.toFixed(1)} />
+            <StatRow label="Longest Win Streak" value={stats.longestWinStreak} color="text-accent" />
+            <StatRow label="Longest Loss Streak" value={stats.longestLossStreak} color="text-negative" />
+          </div>
         </div>
       </div>
 

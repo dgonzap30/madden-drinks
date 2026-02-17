@@ -19,7 +19,7 @@ export default function DashboardTab({ state, onSelectPlayer, onNavigateToLog }:
   const recentGames = [...state.games].reverse().slice(0, 5)
 
   return (
-    <div className="max-w-md mx-auto px-4 pt-4 pb-24">
+    <div className="max-w-md md:max-w-2xl mx-auto px-4 pt-4 pb-24">
       {/* League Title */}
       <h2 className="font-display font-bold text-2xl mb-1 text-text-primary">
         {state.leagueName}
@@ -56,18 +56,23 @@ export default function DashboardTab({ state, onSelectPlayer, onNavigateToLog }:
         </div>
       )}
 
-      {/* Standings */}
-      <StandingsTable standings={standings} onSelectPlayer={onSelectPlayer} />
+      {/* Two-column grid on desktop */}
+      <div className="md:grid md:grid-cols-2 md:gap-5">
+        {/* Left: Standings */}
+        <div>
+          <StandingsTable standings={standings} onSelectPlayer={onSelectPlayer} />
+        </div>
 
-      {/* Recent Games */}
-      {recentGames.length > 0 && (
-        <RecentGamesList games={recentGames} players={state.players} />
-      )}
-
-      {/* League Records */}
-      {totalGamesPlayed > 0 && (
-        <LeagueRecords records={records} players={state.players} />
-      )}
+        {/* Right: Recent Games + Records */}
+        <div>
+          {recentGames.length > 0 && (
+            <RecentGamesList games={recentGames} players={state.players} />
+          )}
+          {totalGamesPlayed > 0 && (
+            <LeagueRecords records={records} players={state.players} />
+          )}
+        </div>
+      </div>
     </div>
   )
 }

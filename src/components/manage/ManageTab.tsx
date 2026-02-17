@@ -26,7 +26,7 @@ export default function ManageTab({ state, roomId, dispatch }: Props) {
   }
 
   return (
-    <div className="max-w-md mx-auto px-4 pt-4 pb-24">
+    <div className="max-w-md md:max-w-2xl mx-auto px-4 pt-4 pb-24">
       <h2 className="text-xl font-display font-bold mb-4 text-text-primary">
         Manage
       </h2>

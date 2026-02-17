@@ -79,7 +79,7 @@ function TabIcon({ id }: { id: Tab }) {
 export default function BottomNav({ active, onChange }: Props) {
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-20 bg-bg-primary/90 backdrop-blur-lg border-t border-border pb-[env(safe-area-inset-bottom)]">
-      <div className="flex items-stretch max-w-lg mx-auto">
+      <div className="flex items-stretch max-w-lg md:max-w-2xl mx-auto">
         {tabs.map((tab) => {
           const isActive = active === tab.id
           return (
