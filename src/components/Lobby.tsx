@@ -64,14 +64,17 @@ export default function Lobby({ onJoin }: LobbyProps) {
   }
 
   return (
-    <div className="min-h-dvh flex items-center justify-center px-4">
-      <div className="max-w-sm md:max-w-md w-full text-center">
+    <div className="min-h-dvh flex items-center justify-center px-4 relative">
+      {/* Ambient spotlight */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-amber/[0.03] rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-sm md:max-w-md w-full text-center relative z-10">
         {/* Title */}
         <div className="mb-8 animate-slide-up" style={{ animationDelay: '0ms' }}>
-          <h1 className="text-5xl font-display font-black uppercase tracking-wide text-text-primary">
+          <h1 className="text-5xl font-display font-black uppercase tracking-wide text-gradient-gold">
             Madden Drinks
           </h1>
-          <p className="section-label text-highlight mt-2">
+          <p className="section-label text-amber-muted mt-2">
             Lifetime Drinking Game Tracker
           </p>
           <p className="text-text-secondary text-xs italic mt-1">
@@ -90,9 +93,9 @@ export default function Lobby({ onJoin }: LobbyProps) {
                 <button
                   key={league.room}
                   onClick={() => rejoin(league.room)}
-                  className="card-interactive w-full flex items-center gap-3 px-4 py-3 rounded-md bg-bg-input border border-border border-l-[3px] border-l-highlight hover:border-l-accent transition-all group text-left"
+                  className="card-interactive w-full flex items-center gap-3 px-4 py-3 border-l-[3px] border-l-amber/50 hover:border-l-amber transition-all group text-left"
                 >
-                  <span className="font-display font-bold tracking-[0.2em] text-highlight text-sm">
+                  <span className="font-display font-bold tracking-[0.2em] text-amber text-sm">
                     {league.room}
                   </span>
                   <span className="flex-1 text-text-primary text-sm font-semibold truncate">
@@ -103,7 +106,7 @@ export default function Lobby({ onJoin }: LobbyProps) {
                   </span>
                   <span
                     onClick={(e) => dismiss(e, league.room)}
-                    className="text-text-muted hover:text-red-400 text-xs ml-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="text-text-muted hover:text-rose text-xs ml-1 opacity-0 group-hover:opacity-100 transition-opacity"
                     role="button"
                     aria-label="Remove"
                   >
@@ -119,7 +122,7 @@ export default function Lobby({ onJoin }: LobbyProps) {
         <div className="animate-slide-up" style={{ animationDelay: '100ms' }}>
           <button
             onClick={createRoom}
-            className="w-full h-14 rounded-md bg-accent text-white font-display text-lg font-bold transition-all active:scale-[0.98] hover:brightness-110 shadow-[0_0_20px_-4px] shadow-accent-glow mb-4"
+            className="w-full h-14 rounded-xl btn-shimmer text-bg-primary font-display text-lg font-bold transition-all active:scale-[0.98] shadow-[0_0_24px_-6px] shadow-amber-glow mb-4"
           >
             Create League
           </button>
@@ -127,14 +130,14 @@ export default function Lobby({ onJoin }: LobbyProps) {
 
         {/* Room code display after creation */}
         {createdRoom && (
-          <div className="mb-4 p-4 card animate-slide-up">
+          <div className="mb-4 p-4 card-featured animate-slide-up">
             <p className="section-label mb-2">League Code</p>
-            <p className="text-3xl tracking-[0.3em] text-highlight mb-3 font-display font-bold">
+            <p className="text-3xl tracking-[0.3em] text-gradient-gold mb-3 font-display font-bold">
               {createdRoom}
             </p>
             <button
               onClick={copyLink}
-              className="text-xs text-text-secondary hover:text-accent transition-colors px-4 py-1.5 rounded border border-border hover:border-accent/40"
+              className="text-xs text-text-secondary hover:text-amber transition-colors px-4 py-1.5 rounded-xl border border-border hover:border-amber/40"
             >
               {copied ? 'Copied!' : 'Copy invite link'}
             </button>
@@ -143,7 +146,7 @@ export default function Lobby({ onJoin }: LobbyProps) {
 
         {/* Divider */}
         <div className="relative my-6 animate-slide-up" style={{ animationDelay: '200ms' }}>
-          <div className="border-t border-border" />
+          <div className="border-t divider-warm" />
           <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-bg-primary section-label px-3">
             or join
           </span>
@@ -157,14 +160,14 @@ export default function Lobby({ onJoin }: LobbyProps) {
             onChange={(e) => setJoinCode(e.target.value.toUpperCase())}
             onKeyDown={(e) => e.key === 'Enter' && joinRoom()}
             placeholder="League code"
-            className="flex-1 h-12 px-4 rounded-md bg-bg-input border border-border text-text-primary placeholder:text-text-muted outline-none focus:border-highlight/50 focus:ring-1 focus:ring-highlight/30 transition-all text-center font-display tracking-[0.3em] uppercase"
+            className="flex-1 h-12 px-4 rounded-xl bg-bg-input border border-border text-text-primary placeholder:text-text-muted outline-none focus:border-amber/50 focus:ring-1 focus:ring-amber/30 input-premium transition-all text-center font-display tracking-[0.3em] uppercase"
             style={{ fontSize: '16px' }}
             maxLength={6}
           />
           <button
             onClick={joinRoom}
             disabled={joinCode.trim().length < 2}
-            className="h-12 px-6 rounded-md bg-accent text-white font-bold disabled:opacity-20 transition-all active:scale-95"
+            className="h-12 px-6 rounded-xl bg-amber text-bg-primary font-bold disabled:opacity-20 transition-all active:scale-95"
           >
             Join
           </button>

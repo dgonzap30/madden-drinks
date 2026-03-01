@@ -28,7 +28,7 @@ function TeamSelector({
       {selectedTeam ? (
         <div className="flex items-center gap-2 mb-1.5">
           <div
-            className="flex items-center gap-2 px-3 py-1.5 rounded border text-sm font-semibold"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-lg border text-sm font-semibold"
             style={{
               borderColor: selectedTeam.color + '80',
               backgroundColor: selectedTeam.color + '15',
@@ -63,7 +63,7 @@ function TeamSelector({
                     onClick={() => onSelect(isSelected ? null : team.abbr)}
                     className={`px-2 py-1.5 text-xs font-display font-bold rounded tracking-wide transition-all active:scale-90 border ${
                       isSelected
-                        ? 'bg-accent/15 border-accent/40 text-accent'
+                        ? 'bg-amber/15 border-amber/40 text-amber'
                         : 'bg-bg-input border-border text-text-secondary'
                     }`}
                     title={`${team.city} ${team.name}`}

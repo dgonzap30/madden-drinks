@@ -1,31 +1,36 @@
 @import "tailwindcss";
 
 @theme {
-  /* Backgrounds */
-  --color-bg-primary: #080C12;
-  --color-bg-card: #0F1520;
-  --color-bg-card-hover: #141C2A;
-  --color-bg-input: #161E2C;
-  --color-bg-elevated: #1A2436;
-  --color-border: #1C2838;
-  --color-border-bright: #2A3A50;
+  /* === Backgrounds === */
+  --color-bg-primary: #0C0C0E;
+  --color-bg-surface: #141416;
+  --color-bg-surface-hover: #1C1C1F;
+  --color-bg-input: #18181B;
+  --color-bg-elevated: #1E1E22;
+  --color-bg-spotlight: #201C16;
 
-  /* Accents */
-  --color-accent: #1FBF5A;
-  --color-accent-glow: #1FBF5A40;
-  --color-negative: #EF3B3B;
-  --color-negative-glow: #EF3B3B40;
-  --color-highlight: #E8B84A;
-  --color-highlight-glow: #E8B84A40;
+  /* === Borders === */
+  --color-border: #232328;
+  --color-border-bright: #3A3A42;
 
-  /* Text */
-  --color-text-primary: #F2F4F8;
-  --color-text-secondary: #8A96AC;
-  --color-text-muted: #4D5A6E;
+  /* === Accent Palette === */
+  --color-amber: #D4A04A;
+  --color-amber-glow: #D4A04A50;
+  --color-amber-muted: #B8893D;
+  --color-rose: #C45454;
+  --color-rose-glow: #C4545440;
+  --color-whiskey: #B87A3D;
+  --color-whiskey-glow: #B87A3D40;
+  --color-emerald: #4ADE80;
 
-  /* Fonts */
+  /* === Text === */
+  --color-text-primary: #F0EDE8;
+  --color-text-secondary: #9B978F;
+  --color-text-muted: #5C5953;
+
+  /* === Fonts === */
   --font-display: 'Barlow Condensed', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-body: 'Outfit', sans-serif;
 }
 
 html {
@@ -35,6 +40,9 @@ html {
 body {
   margin: 0;
   background-color: var(--color-bg-primary);
+  background-image:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(212, 160, 74, 0.04) 0%, transparent 60%);
+  background-attachment: fixed;
   color: var(--color-text-primary);
   font-family: var(--font-body);
   -webkit-tap-highlight-color: transparent;
@@ -54,27 +62,65 @@ input[type="number"] {
   font-family: var(--font-display);
 }
 
-/* ---- Card ---- */
+/* ---- Glass Card Surface ---- */
 .card {
-  background: var(--color-bg-card);
-  background-image: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 50%);
+  background: var(--color-bg-surface);
+  background-image: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.08) 100%
+  );
   border: 1px solid var(--color-border);
-  border-radius: 10px;
+  border-radius: 12px;
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.03) inset,
+    0 -1px 0 0 rgba(0, 0, 0, 0.15) inset,
+    0 2px 8px -2px rgba(0, 0, 0, 0.3);
 }
 
 .card-interactive {
-  background: var(--color-bg-card);
-  background-image: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 50%);
+  background: var(--color-bg-surface);
+  background-image: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.08) 100%
+  );
   border: 1px solid var(--color-border);
-  border-radius: 10px;
-  transition: background-color 0.15s, border-color 0.2s, transform 0.15s;
+  border-radius: 12px;
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.03) inset,
+    0 -1px 0 0 rgba(0, 0, 0, 0.15) inset,
+    0 2px 8px -2px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 .card-interactive:hover {
-  background-color: var(--color-bg-card-hover);
+  background-color: var(--color-bg-surface-hover);
   border-color: var(--color-border-bright);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.04) inset,
+    0 4px 16px -4px rgba(0, 0, 0, 0.4);
+  transform: translateY(-1px);
 }
 .card-interactive:active {
-  transform: scale(0.985);
+  transform: scale(0.985) translateY(0);
+}
+
+/* ---- Featured card with amber border glow ---- */
+.card-featured {
+  background: var(--color-bg-spotlight);
+  background-image: linear-gradient(
+    135deg,
+    rgba(212, 160, 74, 0.04) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  border: 1px solid rgba(212, 160, 74, 0.2);
+  border-radius: 12px;
+  box-shadow:
+    0 1px 0 0 rgba(212, 160, 74, 0.06) inset,
+    0 0 20px -8px rgba(212, 160, 74, 0.15);
 }
 
 /* ---- Tabular number display ---- */
@@ -98,7 +144,7 @@ input[type="number"] {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 11px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-text-muted);
 }
@@ -107,6 +153,24 @@ input[type="number"] {
 .btn-press:active {
   transform: scale(0.96);
   transition: transform 0.1s;
+}
+
+/* ---- Gradient gold text ---- */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #D4A04A 0%, #E8C97A 50%, #D4A04A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---- Warm divider ---- */
+.divider-warm {
+  border-color: rgba(212, 160, 74, 0.12);
+}
+
+/* ---- Premium input inner shadow ---- */
+.input-premium {
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2) inset;
 }
 
 /* ===== Animations ===== */
@@ -171,7 +235,7 @@ input[type="number"] {
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 0 var(--color-accent-glow); }
+  0%, 100% { box-shadow: 0 0 0 0 var(--color-amber-glow); }
   50% { box-shadow: 0 0 0 10px transparent; }
 }
 .animate-pulse-glow {
@@ -189,7 +253,7 @@ input[type="number"] {
 
 @keyframes win-flash {
   0% { background-color: transparent; }
-  30% { background-color: var(--color-accent-glow); }
+  30% { background-color: var(--color-amber-glow); }
   100% { background-color: transparent; }
 }
 .animate-win-flash {
@@ -198,7 +262,7 @@ input[type="number"] {
 
 @keyframes loss-flash {
   0% { background-color: transparent; }
-  30% { background-color: var(--color-negative-glow); }
+  30% { background-color: var(--color-rose-glow); }
   100% { background-color: transparent; }
 }
 .animate-loss-flash {
@@ -231,6 +295,25 @@ input[type="number"] {
 }
 .animate-connecting-pulse {
   animation: connecting-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.btn-shimmer {
+  background-size: 200% auto;
+  background-image: linear-gradient(
+    90deg,
+    var(--color-amber) 0%,
+    #E8C97A 25%,
+    var(--color-amber) 50%,
+    #E8C97A 75%,
+    var(--color-amber) 100%
+  );
+}
+.btn-shimmer:hover {
+  animation: shimmer 2s linear infinite;
 }
 
 /* ---- Scrollbar hiding ---- */

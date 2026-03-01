@@ -71,8 +71,8 @@ function ScoreField({
             if (!isNaN(n) && n >= 0) onChange(n)
           }}
           placeholder="0"
-          className={`flex-1 h-20 text-4xl score-jumbo text-center rounded-md bg-bg-primary border border-border outline-none transition-all focus:border-highlight/60 focus:ring-1 focus:ring-highlight/30 ${
-            isWinning ? 'text-accent' : isLosing ? 'text-negative' : ''
+          className={`flex-1 h-20 text-4xl score-jumbo text-center rounded-xl bg-bg-primary border border-border outline-none input-premium transition-all focus:border-amber/60 focus:ring-1 focus:ring-amber/30 ${
+            isWinning ? 'text-amber' : isLosing ? 'text-rose' : ''
           }`}
           style={!isWinning && !isLosing ? { color: 'var(--color-text-primary)' } : undefined}
           min={0}
@@ -94,7 +94,7 @@ function ScoreField({
             onClick={() => onChange(s)}
             className={`px-2.5 py-1 rounded text-xs font-display font-semibold transition-all active:scale-90 flex flex-col items-center ${
               value === s
-                ? 'bg-accent/15 border border-accent/40 text-accent'
+                ? 'bg-amber/15 border border-amber/40 text-amber'
                 : 'bg-bg-input border border-border text-text-secondary hover:text-text-primary'
             }`}
           >
@@ -131,9 +131,9 @@ export default function ScoreInput({ player1Name, player2Name, team1, team2, sco
           onChange={onScore1}
         />
         <div className="flex items-center gap-3 py-2">
-          <div className="flex-1 border-t border-border" />
+          <div className="flex-1 border-t divider-warm" />
           <span className="font-display font-bold text-text-muted tracking-widest text-sm">VS</span>
-          <div className="flex-1 border-t border-border" />
+          <div className="flex-1 border-t divider-warm" />
         </div>
         <ScoreField
           label={player2Name}

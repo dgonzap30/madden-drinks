@@ -21,14 +21,14 @@ export default function ConnectionStatus({ status, peerCount, roomId }: Props) {
     <div className="flex items-center justify-center gap-4 px-4 py-1 text-xs text-text-secondary bg-bg-primary border-b border-border">
       {status === 'connected' ? (
         <div className="flex items-center gap-1.5">
-          <div className="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_6px] shadow-accent" />
+          <div className="w-1.5 h-1.5 rounded-full bg-emerald shadow-[0_0_6px] shadow-emerald" />
           <span>Connected</span>
         </div>
       ) : (
         <div className="flex items-center gap-1.5">
           <div
             className={`w-1.5 h-1.5 rounded-full ${
-              status === 'connecting' ? 'bg-highlight animate-connecting-pulse' : 'bg-negative'
+              status === 'connecting' ? 'bg-amber animate-connecting-pulse' : 'bg-rose'
             }`}
           />
           <span>{status === 'connecting' ? 'Connecting' : 'Offline'}</span>
@@ -43,7 +43,7 @@ export default function ConnectionStatus({ status, peerCount, roomId }: Props) {
 
       <button
         onClick={copyCode}
-        className="font-display font-bold tracking-widest hover:text-accent transition-colors"
+        className="font-display font-bold tracking-widest hover:text-amber transition-colors"
       >
         {copied ? 'Copied!' : roomId}
       </button>

@@ -24,7 +24,7 @@ export default function HeadToHeadSection({ playerName, h2hStats }: Props) {
               <div className="flex items-center justify-between mb-1">
                 <span className="font-semibold text-sm">vs {oppName}</span>
                 <span className={`text-sm font-bold font-display score-display ${
-                  myWins > oppWins ? 'text-accent' : myWins < oppWins ? 'text-negative' : 'text-text-primary'
+                  myWins > oppWins ? 'text-amber' : myWins < oppWins ? 'text-rose' : 'text-text-primary'
                 }`}>
                   {formatRecord(myWins, oppWins, h2h.ties)}
                 </span>
@@ -38,9 +38,9 @@ export default function HeadToHeadSection({ playerName, h2hStats }: Props) {
               </div>
               {total > 0 && (
                 <div className="flex h-1.5 rounded-full overflow-hidden mt-2">
-                  <div className="bg-accent transition-all" style={{ width: `${(myWins / total) * 100}%` }} />
+                  <div className="bg-amber transition-all" style={{ width: `${(myWins / total) * 100}%` }} />
                   {h2h.ties > 0 && <div className="bg-text-muted transition-all" style={{ width: `${(h2h.ties / total) * 100}%` }} />}
-                  <div className="bg-negative transition-all" style={{ width: `${(oppWins / total) * 100}%` }} />
+                  <div className="bg-rose transition-all" style={{ width: `${(oppWins / total) * 100}%` }} />
                 </div>
               )}
             </div>

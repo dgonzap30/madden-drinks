@@ -29,7 +29,7 @@ export default function PlayerGameLog({ games, playerId, players }: Props) {
           return (
             <div key={game.id} className="flex items-center px-4 py-2.5">
               <div className={`w-7 text-[10px] font-bold font-display rounded px-1 py-0.5 text-center ${
-                won ? 'bg-accent/20 text-accent' : lost ? 'bg-negative/20 text-negative' : 'bg-border text-text-muted'
+                won ? 'bg-amber/20 text-amber' : lost ? 'bg-rose/20 text-rose' : 'bg-border text-text-muted'
               }`}>
                 {won ? 'W' : lost ? 'L' : 'T'}
               </div>

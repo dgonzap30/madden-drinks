@@ -31,7 +31,7 @@ export default function LeagueShell({ state, dispatch, connectionStatus, peerCou
         <div className="flex items-center justify-between px-4 pt-3">
           <button
             onClick={onLeave}
-            className="text-text-secondary text-sm hover:text-accent transition-colors"
+            className="text-text-secondary text-sm hover:text-amber transition-colors"
           >
             &larr; Leave
           </button>
@@ -62,7 +62,7 @@ export default function LeagueShell({ state, dispatch, connectionStatus, peerCou
       <ConnectionStatus status={connectionStatus} peerCount={peerCount} roomId={roomId} />
 
       {activeTab === 'dashboard' && (
-        <DashboardTab state={state} onSelectPlayer={setSelectedPlayerId} onNavigateToLog={() => setActiveTab('log')} />
+        <DashboardTab state={state} dispatch={dispatch} onSelectPlayer={setSelectedPlayerId} onNavigateToLog={() => setActiveTab('log')} />
       )}
       {activeTab === 'log' && (
         <LogGameTab players={state.players} dispatch={dispatch} onLogged={() => setActiveTab('dashboard')} />

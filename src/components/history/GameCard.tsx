@@ -32,7 +32,7 @@ export default function GameCard({ game, players, dispatch, onToast }: Props) {
 
       <div className="flex items-center justify-center gap-4 py-1">
         <div className="text-center flex-1">
-          <div className={`font-semibold text-sm ${game.winnerId === game.player1Id ? 'text-accent' : game.loserId === game.player1Id ? 'text-negative' : ''}`}>
+          <div className={`font-semibold text-sm ${game.winnerId === game.player1Id ? 'text-amber' : game.loserId === game.player1Id ? 'text-rose' : ''}`}>
             {p1Name}
           </div>
           {game.team1 && <TeamBadge abbr={game.team1} />}
@@ -45,7 +45,7 @@ export default function GameCard({ game, players, dispatch, onToast }: Props) {
         </div>
 
         <div className="text-center flex-1">
-          <div className={`font-semibold text-sm ${game.winnerId === game.player2Id ? 'text-accent' : game.loserId === game.player2Id ? 'text-negative' : ''}`}>
+          <div className={`font-semibold text-sm ${game.winnerId === game.player2Id ? 'text-amber' : game.loserId === game.player2Id ? 'text-rose' : ''}`}>
             {p2Name}
           </div>
           {game.team2 && <TeamBadge abbr={game.team2} />}
@@ -74,8 +74,10 @@ export default function GameCard({ game, players, dispatch, onToast }: Props) {
                         onToast?.('Shot marked')
                       }
                     }}
-                    className={`w-5 h-5 rounded-full transition-all hover:scale-110 ${
-                      i < game.drinksFulfilled ? 'bg-highlight' : 'bg-border'
+                    className={`w-6 h-6 rounded-full transition-all hover:scale-110 active:scale-90 ${
+                      i < game.drinksFulfilled
+                        ? 'bg-whiskey shadow-[0_0_6px_-1px] shadow-whiskey-glow'
+                        : 'bg-border hover:bg-border-bright'
                     }`}
                   />
                 ))}
@@ -83,7 +85,7 @@ export default function GameCard({ game, players, dispatch, onToast }: Props) {
               <span className="text-text-muted text-[11px] font-display">{game.drinksFulfilled}/{game.drinksOwed}</span>
             </div>
             {allFulfilled && (
-              <span className="text-highlight font-display font-bold text-xs">Done</span>
+              <span className="text-whiskey font-display font-bold text-xs">Done</span>
             )}
           </div>
         )}

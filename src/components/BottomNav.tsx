@@ -26,7 +26,6 @@ function TabIcon({ id }: { id: Tab }) {
 
   switch (id) {
     case 'dashboard':
-      // Trophy icon
       return (
         <svg {...props}>
           <path d="M6 9H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
@@ -38,7 +37,6 @@ function TabIcon({ id }: { id: Tab }) {
         </svg>
       )
     case 'log':
-      // Football with plus
       return (
         <svg {...props}>
           <ellipse cx="12" cy="12" rx="9" ry="5" transform="rotate(-45 12 12)" />
@@ -51,7 +49,6 @@ function TabIcon({ id }: { id: Tab }) {
         </svg>
       )
     case 'history':
-      // Clock icon
       return (
         <svg {...props}>
           <circle cx="12" cy="12" r="9" />
@@ -59,7 +56,6 @@ function TabIcon({ id }: { id: Tab }) {
         </svg>
       )
     case 'manage':
-      // Sliders icon
       return (
         <svg {...props}>
           <path d="M4 21v-7" />
@@ -78,8 +74,8 @@ function TabIcon({ id }: { id: Tab }) {
 
 export default function BottomNav({ active, onChange }: Props) {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-20 bg-bg-primary/90 backdrop-blur-lg border-t border-border pb-[env(safe-area-inset-bottom)]">
-      <div className="flex items-stretch max-w-lg md:max-w-2xl mx-auto">
+    <nav className="fixed bottom-0 left-0 right-0 z-20 bg-bg-primary/90 backdrop-blur-xl border-t border-border pb-[env(safe-area-inset-bottom)]">
+      <div className="flex items-stretch max-w-lg mx-auto">
         {tabs.map((tab) => {
           const isActive = active === tab.id
           return (
@@ -88,7 +84,7 @@ export default function BottomNav({ active, onChange }: Props) {
               onClick={() => onChange(tab.id)}
               className={`relative flex-1 flex flex-col items-center justify-center h-14 transition-colors ${
                 isActive
-                  ? 'text-accent'
+                  ? 'text-amber'
                   : 'text-text-muted hover:text-text-secondary'
               }`}
             >
@@ -97,7 +93,7 @@ export default function BottomNav({ active, onChange }: Props) {
                 {tab.label}
               </span>
               {isActive && (
-                <span className="absolute bottom-0 w-5 h-[3px] rounded-full bg-accent animate-tab-indicator" />
+                <span className="absolute bottom-0 w-5 h-[3px] rounded-full bg-amber animate-tab-indicator" />
               )}
             </button>
           )

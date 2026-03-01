@@ -82,25 +82,25 @@ export default function LogGameTab({ players, dispatch, onLogged }: Props) {
   if (logged) {
     return (
       <div className="flex flex-col items-center justify-center pt-20 animate-slide-up">
-        <div className="w-16 h-16 mb-6 rounded-full bg-accent/20 flex items-center justify-center animate-celebrate animate-pulse-glow">
-          <span className="text-accent text-3xl">&#10003;</span>
+        <div className="w-16 h-16 mb-6 rounded-full bg-amber/20 flex items-center justify-center animate-celebrate animate-pulse-glow">
+          <span className="text-amber text-3xl">&#10003;</span>
         </div>
-        <h3 className="font-display font-black text-3xl text-accent uppercase tracking-wide mb-4">
+        <h3 className="font-display font-black text-3xl text-gradient-gold uppercase tracking-wide mb-4">
           Game Logged
         </h3>
 
-        <div className="card p-4 w-full max-w-xs text-center mb-6">
+        <div className="card-featured p-4 w-full max-w-xs text-center mb-6">
           <div className="flex items-center justify-center gap-3">
             <span className="text-text-primary font-semibold">{logged.player1Name}</span>
-            <span className="score-jumbo text-2xl text-accent">{logged.score1}</span>
+            <span className="score-jumbo text-2xl text-amber">{logged.score1}</span>
             <span className="text-text-muted font-display font-bold text-sm">-</span>
-            <span className="score-jumbo text-2xl text-accent">{logged.score2}</span>
+            <span className="score-jumbo text-2xl text-amber">{logged.score2}</span>
             <span className="text-text-primary font-semibold">{logged.player2Name}</span>
           </div>
           {logged.loserName && (
             <div className="text-sm text-text-secondary mt-2">
-              <span className="text-negative">{logged.loserName}</span> owes{' '}
-              <span className="text-highlight font-display font-bold">{describeDrinks(logged.drinks)}</span>
+              <span className="text-rose">{logged.loserName}</span> owes{' '}
+              <span className="text-whiskey font-display font-bold">{describeDrinks(logged.drinks)}</span>
             </div>
           )}
         </div>
@@ -111,13 +111,13 @@ export default function LogGameTab({ players, dispatch, onLogged }: Props) {
               resetForm()
               onLogged()
             }}
-            className="flex-1 h-12 rounded-md bg-bg-input border border-border text-text-primary text-sm font-semibold transition-all active:scale-[0.98] hover:border-border-bright"
+            className="flex-1 h-12 rounded-xl bg-bg-input border border-border text-text-primary text-sm font-semibold transition-all active:scale-[0.98] hover:border-border-bright"
           >
             Back to Standings
           </button>
           <button
             onClick={resetForm}
-            className="flex-1 h-12 rounded-md bg-accent text-white text-sm font-bold transition-all active:scale-[0.98] hover:brightness-110"
+            className="flex-1 h-12 rounded-xl bg-amber text-bg-primary text-sm font-bold transition-all active:scale-[0.98] hover:brightness-110"
           >
             Log Another
           </button>
@@ -127,8 +127,8 @@ export default function LogGameTab({ players, dispatch, onLogged }: Props) {
   }
 
   return (
-    <div className="max-w-md md:max-w-2xl mx-auto px-4 pt-4 pb-24">
-      <h2 className="text-xl font-bold mb-4 text-text-primary">
+    <div className="max-w-md mx-auto px-4 pt-4 pb-24">
+      <h2 className="text-xl font-display font-bold tracking-wide mb-4 text-text-primary">
         Log Game
       </h2>
 
@@ -184,7 +184,7 @@ export default function LogGameTab({ players, dispatch, onLogged }: Props) {
       <button
         onClick={logGame}
         disabled={!canLog}
-        className="w-full h-14 mt-6 rounded-md bg-accent text-white text-lg font-bold transition-all active:scale-[0.98] disabled:opacity-20 hover:brightness-110"
+        className="w-full h-14 mt-6 rounded-xl btn-shimmer text-bg-primary text-lg font-bold font-display transition-all active:scale-[0.98] disabled:opacity-20 shadow-[0_0_24px_-6px] shadow-amber-glow"
       >
         Log Game
       </button>

@@ -23,7 +23,7 @@ export default function HistoryTab({ state, dispatch }: Props) {
 
   return (
     <div className="max-w-md md:max-w-2xl mx-auto px-4 pt-4 pb-24">
-      <h2 className="text-xl font-bold mb-3 text-text-primary font-display">
+      <h2 className="text-xl font-bold mb-3 text-text-primary font-display tracking-wide">
         Game History
       </h2>
 
@@ -33,7 +33,7 @@ export default function HistoryTab({ state, dispatch }: Props) {
           onClick={() => setFilterPlayerId(null)}
           className={`px-3 py-1.5 rounded text-xs font-semibold font-display transition-all ${
             !filterPlayerId
-              ? 'bg-accent/15 border border-accent/40 text-accent'
+              ? 'bg-amber/15 border border-amber/40 text-amber'
               : 'bg-bg-input border border-border text-text-secondary'
           }`}
         >
@@ -45,7 +45,7 @@ export default function HistoryTab({ state, dispatch }: Props) {
             onClick={() => setFilterPlayerId(filterPlayerId === p.id ? null : p.id)}
             className={`px-3 py-1.5 rounded text-xs font-semibold font-display transition-all ${
               filterPlayerId === p.id
-                ? 'bg-accent/15 border border-accent/40 text-accent'
+                ? 'bg-amber/15 border border-amber/40 text-amber'
                 : 'bg-bg-input border border-border text-text-secondary'
             }`}
           >

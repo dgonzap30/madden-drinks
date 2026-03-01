@@ -48,7 +48,7 @@ export default function LeagueRecords({ records, players }: Props) {
         {items.map((item) => (
           <div key={item.label} className="flex items-center justify-between px-4 py-3">
             <span className="text-text-secondary text-xs">{item.label}</span>
-            <span className="text-sm font-semibold font-display text-highlight">{item.value}</span>
+            <span className="text-sm font-semibold font-display text-amber">{item.value}</span>
           </div>
         ))}
       </div>

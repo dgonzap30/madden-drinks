@@ -25,12 +25,12 @@ export default function PlayerPicker({ players, player1, player2, onSelect1, onS
                 if (player2?.id === p.id) onSelect2(null)
               }
             }}
-            className={`px-4 py-2 rounded-md text-sm font-semibold transition-all duration-200 active:scale-95 ${
+            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 active:scale-95 ${
               player1?.id === p.id
-                ? 'bg-accent/15 border border-accent/50 text-accent shadow-[0_0_8px_-2px] shadow-accent-glow'
+                ? 'bg-amber/10 border border-amber/40 text-amber shadow-[0_0_8px_-2px] shadow-amber-glow'
                 : player2?.id === p.id
                   ? 'bg-bg-input border border-border text-text-muted opacity-40 transition-all duration-200'
-                  : 'bg-bg-input border border-border text-text-primary hover:border-text-secondary'
+                  : 'bg-bg-input border border-border text-text-primary hover:border-border-bright'
             }`}
           >
             {p.name}
@@ -52,12 +52,12 @@ export default function PlayerPicker({ players, player1, player2, onSelect1, onS
                 if (player1?.id === p.id) onSelect1(null)
               }
             }}
-            className={`px-4 py-2 rounded-md text-sm font-semibold transition-all duration-200 active:scale-95 ${
+            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 active:scale-95 ${
               player2?.id === p.id
-                ? 'bg-accent/15 border border-accent/50 text-accent shadow-[0_0_8px_-2px] shadow-accent-glow'
+                ? 'bg-amber/10 border border-amber/40 text-amber shadow-[0_0_8px_-2px] shadow-amber-glow'
                 : player1?.id === p.id
                   ? 'bg-bg-input border border-border text-text-muted opacity-40 transition-all duration-200'
-                  : 'bg-bg-input border border-border text-text-primary hover:border-text-secondary'
+                  : 'bg-bg-input border border-border text-text-primary hover:border-border-bright'
             }`}
           >
             {p.name}

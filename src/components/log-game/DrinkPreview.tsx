@@ -16,9 +16,9 @@ function DrinkMeter({ drinks, isTie }: { drinks: number; isTie: boolean }) {
 
   const getColor = (index: number) => {
     if (index >= filled) return 'bg-border'
-    if (drinks >= 4) return 'bg-negative'
-    if (drinks >= 3) return 'bg-highlight'
-    return 'bg-accent'
+    if (drinks >= 4) return 'bg-rose'
+    if (drinks >= 2) return 'bg-whiskey'
+    return 'bg-amber'
   }
 
   return (
@@ -43,7 +43,7 @@ export default function DrinkPreview({ player1Name, player2Name, team1, team2, s
   const winnerName = isTie ? null : score1 > score2 ? player1Name : player2Name
 
   return (
-    <div className={`card p-4 ${!isTie ? (score1 > score2 ? 'bg-accent/[0.03]' : 'bg-negative/[0.03]') : ''}`}>
+    <div className={`card-featured p-4 ${!isTie ? 'border-amber/20' : ''}`}>
       {/* Score Display */}
       <div className="flex items-center justify-center gap-6 mb-3 pt-1">
         <div className="text-center">
@@ -52,7 +52,7 @@ export default function DrinkPreview({ player1Name, player2Name, team1, team2, s
             {team1 && <TeamBadge abbr={team1} />}
           </div>
           <div
-            className={`score-jumbo text-4xl ${score1 > score2 ? 'text-accent' : score1 < score2 ? 'text-negative' : 'text-text-primary'}`}
+            className={`score-jumbo text-4xl ${score1 > score2 ? 'text-amber' : score1 < score2 ? 'text-rose' : 'text-text-primary'}`}
           >
             {score1}
           </div>
@@ -64,7 +64,7 @@ export default function DrinkPreview({ player1Name, player2Name, team1, team2, s
             {team2 && <TeamBadge abbr={team2} />}
           </div>
           <div
-            className={`score-jumbo text-4xl ${score2 > score1 ? 'text-accent' : score2 < score1 ? 'text-negative' : 'text-text-primary'}`}
+            className={`score-jumbo text-4xl ${score2 > score1 ? 'text-amber' : score2 < score1 ? 'text-rose' : 'text-text-primary'}`}
           >
             {score2}
           </div>
@@ -83,19 +83,19 @@ export default function DrinkPreview({ player1Name, player2Name, team1, team2, s
             isTie
               ? 'text-text-muted'
               : drinks >= 4
-                ? 'text-negative'
+                ? 'text-rose'
                 : drinks >= 2
-                  ? 'text-highlight'
-                  : 'text-accent'
+                  ? 'text-whiskey'
+                  : 'text-amber'
           }`}
         >
           {isTie ? (
             'No shots — tie game'
           ) : (
             <>
-              <span className="text-negative">{loserName}</span>
+              <span className="text-rose">{loserName}</span>
               {' '}owes{' '}
-              <span className="text-highlight font-display font-bold">
+              <span className="text-whiskey font-display font-bold">
                 {describeDrinks(drinks)}
               </span>
               {winnerName && (

@@ -29,7 +29,7 @@ export default function PlayerProfileTab({ state, playerId, onBack }: Props) {
       {/* Back Button */}
       <button
         onClick={onBack}
-        className="text-text-secondary text-sm hover:text-accent transition-colors mb-3"
+        className="text-text-secondary text-sm hover:text-amber transition-colors mb-3"
       >
         <svg className="w-4 h-4 inline mr-1" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 12L6 8l4-4" /></svg>
         Back to standings
@@ -48,14 +48,14 @@ export default function PlayerProfileTab({ state, playerId, onBack }: Props) {
           </div>
           <div className="section-label text-[9px] mt-0.5">Record</div>
         </div>
-        <div className={`card p-3 text-center border-t-2 ${winPct > 0.5 ? 'border-accent' : winPct < 0.5 ? 'border-negative' : 'border-text-muted'}`}>
+        <div className={`card p-3 text-center border-t-2 ${winPct > 0.5 ? 'border-amber' : winPct < 0.5 ? 'border-rose' : 'border-text-muted'}`}>
           <div className="score-jumbo text-2xl text-text-primary pt-1">
             {stats.totalGames > 0 ? formatPct(stats.winPct) : '--'}
           </div>
           <div className="section-label text-[9px] mt-0.5">Win %</div>
         </div>
-        <div className={`card p-3 text-center border-t-2 ${netDrinks > 0 ? 'border-accent' : netDrinks < 0 ? 'border-negative' : 'border-text-muted'}`}>
-          <div className={`score-jumbo text-2xl pt-1 ${netDrinks > 0 ? 'text-accent' : netDrinks < 0 ? 'text-negative' : 'text-text-primary'}`}>
+        <div className={`card p-3 text-center border-t-2 ${netDrinks > 0 ? 'border-amber' : netDrinks < 0 ? 'border-rose' : 'border-text-muted'}`}>
+          <div className={`score-jumbo text-2xl pt-1 ${netDrinks > 0 ? 'text-amber' : netDrinks < 0 ? 'text-rose' : 'text-text-primary'}`}>
             {stats.totalGames > 0 ? (netDrinks > 0 ? `+${netDrinks}` : netDrinks) : '--'}
           </div>
           <div className="section-label text-[9px] mt-0.5">Net Shots</div>
@@ -68,14 +68,14 @@ export default function PlayerProfileTab({ state, playerId, onBack }: Props) {
         <div className="mb-5">
           <h3 className="section-label mb-2">Drinks</h3>
           <div className="card divide-y divide-border">
-            <StatRow label="Shots Owed" value={stats.drinksTaken} color="text-negative" />
-            <StatRow label="Shots Taken" value={stats.drinksConsumed} color="text-highlight" />
+            <StatRow label="Shots Owed" value={stats.drinksTaken} color="text-rose" />
+            <StatRow label="Shots Taken" value={stats.drinksConsumed} color="text-whiskey" />
             {stats.drinksPending > 0 && (
-              <StatRow label="Shots Pending" value={stats.drinksPending} color="text-negative" />
+              <StatRow label="Shots Pending" value={stats.drinksPending} color="text-rose" />
             )}
-            <StatRow label="Shots Imposed" value={stats.drinksGiven} color="text-accent" />
+            <StatRow label="Shots Imposed" value={stats.drinksGiven} color="text-amber" />
             {stats.mostDrinksInOneGame > 0 && (
-              <StatRow label="Most Shots (1 Game)" value={stats.mostDrinksInOneGame} color="text-highlight" />
+              <StatRow label="Most Shots (1 Game)" value={stats.mostDrinksInOneGame} color="text-whiskey" />
             )}
           </div>
         </div>
@@ -86,8 +86,8 @@ export default function PlayerProfileTab({ state, playerId, onBack }: Props) {
           <div className="card divide-y divide-border">
             <StatRow label="Avg Pts Scored" value={stats.avgPointsScored.toFixed(1)} />
             <StatRow label="Avg Pts Allowed" value={stats.avgPointsAllowed.toFixed(1)} />
-            <StatRow label="Longest Win Streak" value={stats.longestWinStreak} color="text-accent" />
-            <StatRow label="Longest Loss Streak" value={stats.longestLossStreak} color="text-negative" />
+            <StatRow label="Longest Win Streak" value={stats.longestWinStreak} color="text-amber" />
+            <StatRow label="Longest Loss Streak" value={stats.longestLossStreak} color="text-rose" />
           </div>
         </div>
       </div>
