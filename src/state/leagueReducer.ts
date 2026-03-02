@@ -21,7 +21,8 @@ export const initialState: LeagueState = {
   leagueName: '',
 }
 
-export function migrateState(saved: Partial<LeagueState>): LeagueState {
+export function migrateState(saved: Partial<LeagueState> | undefined | null): LeagueState {
+  if (!saved || typeof saved !== 'object') return { ...initialState }
   return {
     phase: saved.phase ?? 'setup',
     players: (saved.players ?? []).map((p) => ({
@@ -163,5 +164,8 @@ export function leagueReducer(state: LeagueState, action: LeagueAction): LeagueS
 
     case 'LOAD_STATE':
       return migrateState(action.state)
+
+    default:
+      return state
   }
 }
