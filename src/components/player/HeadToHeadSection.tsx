@@ -8,8 +8,8 @@ interface Props {
 
 export default function HeadToHeadSection({ playerName, h2hStats }: Props) {
   return (
-    <div className="mb-5">
-      <h3 className="section-label mb-2">Head to Head</h3>
+    <div className="mb-6">
+      <h3 className="section-label-lg mb-2">Head to Head</h3>
       <div className="card divide-y divide-border">
         {h2hStats.map((h2h) => {
           const oppName = h2h.player1Name === playerName ? h2h.player2Name : h2h.player1Name
@@ -29,7 +29,7 @@ export default function HeadToHeadSection({ playerName, h2hStats }: Props) {
                   {formatRecord(myWins, oppWins, h2h.ties)}
                 </span>
               </div>
-              <div className="flex items-center gap-3 text-text-muted text-[10px]">
+              <div className="flex items-center gap-3 text-text-tertiary text-[10px]">
                 <span>Given: {myDrinksGiven}</span>
                 <span>&middot;</span>
                 <span>Taken: {oppDrinksGiven}</span>

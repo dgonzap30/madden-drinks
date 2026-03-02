@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { Player, GameRecord } from '../../types/league.ts'
 import type { LeagueAction } from '../../state/leagueReducer.ts'
 import { formatDate } from '../../utils/formatters.ts'
@@ -9,9 +10,11 @@ interface Props {
   players: Player[]
   dispatch: (action: LeagueAction) => void
   onToast?: (msg: string) => void
+  onDelete?: (gameId: string) => void
 }
 
-export default function GameCard({ game, players, dispatch, onToast }: Props) {
+export default function GameCard({ game, players, dispatch, onToast, onDelete }: Props) {
+  const [confirmDelete, setConfirmDelete] = useState(false)
   const getName = (id: string) => players.find((p) => p.id === id)?.name ?? '???'
   const p1Name = getName(game.player1Id)
   const p2Name = getName(game.player2Id)
@@ -20,13 +23,34 @@ export default function GameCard({ game, players, dispatch, onToast }: Props) {
   const allFulfilled = game.drinksFulfilled >= game.drinksOwed
 
   return (
-    <div className="card px-4 py-3">
+    <div className="card px-4 py-3 relative">
       <div className="flex items-center justify-between mb-2 pt-1">
-        <div className="text-text-muted text-[10px] uppercase tracking-[0.12em] font-display">
+        <div className="text-text-tertiary text-[10px] uppercase tracking-[0.12em] font-display">
           {formatDate(game.timestamp)}
         </div>
-        <div className="text-text-muted text-[10px] font-display">
-          {describeScoreGap(game.score1, game.score2)}
+        <div className="flex items-center gap-2">
+          <div className="text-text-tertiary text-[10px] font-display">
+            {describeScoreGap(game.score1, game.score2)}
+          </div>
+          {onDelete && (
+            <button
+              onClick={() => {
+                if (confirmDelete) {
+                  onDelete(game.id)
+                } else {
+                  setConfirmDelete(true)
+                  setTimeout(() => setConfirmDelete(false), 3000)
+                }
+              }}
+              className={`text-xs font-display transition-colors ${
+                confirmDelete
+                  ? 'text-rose font-semibold'
+                  : 'text-text-muted hover:text-rose'
+              }`}
+            >
+              {confirmDelete ? 'Delete?' : '×'}
+            </button>
+          )}
         </div>
       </div>
 
@@ -54,7 +78,7 @@ export default function GameCard({ game, players, dispatch, onToast }: Props) {
 
       <div className="mt-2">
         {isTie ? (
-          <div className="text-center text-text-muted text-xs">Tie — no shots</div>
+          <div className="text-center text-text-tertiary text-xs">Tie — no shots</div>
         ) : (
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -82,7 +106,7 @@ export default function GameCard({ game, players, dispatch, onToast }: Props) {
                   />
                 ))}
               </div>
-              <span className="text-text-muted text-[11px] font-display">{game.drinksFulfilled}/{game.drinksOwed}</span>
+              <span className="text-text-tertiary text-[11px] font-display">{game.drinksFulfilled}/{game.drinksOwed}</span>
             </div>
             {allFulfilled && (
               <span className="text-whiskey font-display font-bold text-xs">Done</span>

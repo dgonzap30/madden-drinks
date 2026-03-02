@@ -42,8 +42,8 @@ export default function LeagueRecords({ records, players }: Props) {
   if (items.length === 0) return null
 
   return (
-    <div className="mb-5">
-      <h3 className="section-label mb-2">League Records</h3>
+    <div className="mb-6">
+      <h3 className="section-label-lg mb-2">League Records</h3>
       <div className="card divide-y divide-border">
         {items.map((item) => (
           <div key={item.label} className="flex items-center justify-between px-4 py-3">

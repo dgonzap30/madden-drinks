@@ -12,6 +12,7 @@
   /* === Borders === */
   --color-border: #232328;
   --color-border-bright: #3A3A42;
+  --color-border-warm: rgba(212, 160, 74, 0.18);
 
   /* === Accent Palette === */
   --color-amber: #D4A04A;
@@ -26,7 +27,8 @@
   /* === Text === */
   --color-text-primary: #F0EDE8;
   --color-text-secondary: #9B978F;
-  --color-text-muted: #5C5953;
+  --color-text-tertiary: #7A756C;
+  --color-text-muted: #6B665E;
 
   /* === Fonts === */
   --font-display: 'Barlow Condensed', sans-serif;
@@ -149,6 +151,15 @@ input[type="number"] {
   color: var(--color-text-muted);
 }
 
+.section-label-lg {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+}
+
 /* ---- Button press ---- */
 .btn-press:active {
   transform: scale(0.96);
@@ -165,7 +176,7 @@ input[type="number"] {
 
 /* ---- Warm divider ---- */
 .divider-warm {
-  border-color: rgba(212, 160, 74, 0.12);
+  border-color: var(--color-border-warm);
 }
 
 /* ---- Premium input inner shadow ---- */

@@ -23,7 +23,7 @@ export default function LeagueSetup({ players, dispatch }: Props) {
   }
 
   return (
-    <div className="max-w-md mx-auto px-4 pt-6 pb-24">
+    <div className="max-w-md mx-auto px-4 pt-6 pb-28">
       <h2 className="font-display font-black text-4xl uppercase tracking-wide text-center mb-1 animate-slide-up text-gradient-gold">
         New League
       </h2>
@@ -33,7 +33,7 @@ export default function LeagueSetup({ players, dispatch }: Props) {
 
       {/* League Name */}
       <div className="mb-6 animate-slide-up" style={{ animationDelay: '120ms' }}>
-        <label className="section-label mb-2 block">League Name</label>
+        <label className="section-label-lg mb-2 block">League Name</label>
         <input
           type="text"
           value={leagueName}
@@ -47,7 +47,7 @@ export default function LeagueSetup({ players, dispatch }: Props) {
 
       {/* Add Player */}
       <div className="animate-slide-up" style={{ animationDelay: '180ms' }}>
-        <label className="section-label mb-2 block">Players</label>
+        <label className="section-label-lg mb-2 block">Players</label>
         <div className="flex gap-2 mb-4">
           <input
             type="text"
@@ -96,7 +96,7 @@ export default function LeagueSetup({ players, dispatch }: Props) {
       )}
 
       {/* Player Count */}
-      <p className="text-text-muted text-xs text-center mb-4">
+      <p className="text-text-tertiary text-xs text-center mb-4">
         {players.length} player{players.length !== 1 ? 's' : ''} added
         {players.length < 2 ? ' (need at least 2)' : ''}
       </p>

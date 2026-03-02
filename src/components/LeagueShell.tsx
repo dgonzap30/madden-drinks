@@ -42,30 +42,32 @@ export default function LeagueShell({ state, dispatch, connectionStatus, peerCou
     )
   }
 
+  const leagueName = state.leagueName || undefined
+
   // Player profile view
   if (selectedPlayerId) {
     return (
-      <div className="min-h-dvh">
+      <div className="min-h-dvh lg:pl-[200px]">
         <ConnectionStatus status={connectionStatus} peerCount={peerCount} roomId={roomId} />
         <PlayerProfileTab
           state={state}
           playerId={selectedPlayerId}
           onBack={() => setSelectedPlayerId(null)}
         />
-        <BottomNav active={activeTab} onChange={(t) => { setSelectedPlayerId(null); setActiveTab(t) }} />
+        <BottomNav active={activeTab} onChange={(t) => { setSelectedPlayerId(null); setActiveTab(t) }} leagueName={leagueName} />
       </div>
     )
   }
 
   return (
-    <div className="min-h-dvh">
+    <div className="min-h-dvh lg:pl-[200px]">
       <ConnectionStatus status={connectionStatus} peerCount={peerCount} roomId={roomId} />
 
       {activeTab === 'dashboard' && (
         <DashboardTab state={state} dispatch={dispatch} onSelectPlayer={setSelectedPlayerId} onNavigateToLog={() => setActiveTab('log')} />
       )}
       {activeTab === 'log' && (
-        <LogGameTab players={state.players} dispatch={dispatch} onLogged={() => setActiveTab('dashboard')} />
+        <LogGameTab players={state.players} games={state.games} dispatch={dispatch} onLogged={() => setActiveTab('dashboard')} />
       )}
       {activeTab === 'history' && (
         <HistoryTab state={state} dispatch={dispatch} />
@@ -74,7 +76,7 @@ export default function LeagueShell({ state, dispatch, connectionStatus, peerCou
         <ManageTab state={state} roomId={roomId} dispatch={dispatch} />
       )}
 
-      <BottomNav active={activeTab} onChange={setActiveTab} />
+      <BottomNav active={activeTab} onChange={setActiveTab} leagueName={leagueName} />
     </div>
   )
 }

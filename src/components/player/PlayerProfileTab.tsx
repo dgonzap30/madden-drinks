@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { LeagueState } from '../../types/league.ts'
 import { computePlayerStats, computeHeadToHead } from '../../utils/leagueStats.ts'
 import { formatRecord, formatPct } from '../../utils/formatters.ts'
@@ -24,8 +25,29 @@ export default function PlayerProfileTab({ state, playerId, onBack }: Props) {
   const winPct = stats.winPct
   const netDrinks = stats.netDrinks
 
+  const [statsCopied, setStatsCopied] = useState(false)
+
+  const shareStats = () => {
+    const streakType = stats.currentWinStreak > 0 ? 'W' : stats.currentLossStreak > 0 ? 'L' : null
+    const streakCount = stats.currentWinStreak || stats.currentLossStreak
+    const streakText = streakType ? `${streakType}${streakCount}` : 'None'
+
+    const text = [
+      `\u{1F3C8} ${player.name} \u{2014} ${state.leagueName}`,
+      `Record: ${formatRecord(stats.wins, stats.losses, stats.ties)} (${(stats.winPct * 100).toFixed(1)}%)`,
+      `Net Shots: ${netDrinks > 0 ? '+' : ''}${netDrinks}`,
+      `Avg Score: ${stats.avgPointsScored.toFixed(1)} - ${stats.avgPointsAllowed.toFixed(1)}`,
+      `Current Streak: ${streakText}`,
+    ].join('\n')
+
+    navigator.clipboard.writeText(text).then(() => {
+      setStatsCopied(true)
+      setTimeout(() => setStatsCopied(false), 2000)
+    })
+  }
+
   return (
-    <div className="max-w-md md:max-w-2xl mx-auto px-4 pt-4 pb-24">
+    <div className="max-w-md md:max-w-2xl lg:max-w-5xl xl:max-w-6xl mx-auto px-4 pt-4 pb-28">
       {/* Back Button */}
       <button
         onClick={onBack}
@@ -35,14 +57,24 @@ export default function PlayerProfileTab({ state, playerId, onBack }: Props) {
         Back to standings
       </button>
 
-      {/* Name */}
-      <h2 className="font-display font-black text-4xl mb-4 text-text-primary">
-        {player.name}
-      </h2>
+      {/* Name + Share */}
+      <div className="flex items-center gap-3 mb-4">
+        <h2 className="font-display font-black text-4xl text-text-primary">
+          {player.name}
+        </h2>
+        {stats.totalGames > 0 && (
+          <button
+            onClick={shareStats}
+            className="text-xs bg-amber/10 text-amber border border-amber/30 rounded-lg px-3 py-1.5 hover:bg-amber/20 transition-colors font-display font-semibold shrink-0"
+          >
+            {statsCopied ? 'Copied!' : 'Share Stats'}
+          </button>
+        )}
+      </div>
 
       {/* Big Stats */}
-      <div className="grid grid-cols-3 gap-2 mb-5">
-        <div className="card p-3 text-center border-t-2 border-text-secondary">
+      <div className="grid grid-cols-3 gap-3 mb-6">
+        <div className="card p-3 text-center border-t-2 border-border-bright">
           <div className="score-jumbo text-2xl text-text-primary pt-1">
             {stats.totalGames > 0 ? formatRecord(stats.wins, stats.losses, stats.ties) : '--'}
           </div>
@@ -63,10 +95,10 @@ export default function PlayerProfileTab({ state, playerId, onBack }: Props) {
       </div>
 
       {/* Drinks + Performance side by side on desktop */}
-      <div className="md:grid md:grid-cols-2 md:gap-4">
+      <div className="md:grid md:grid-cols-2 md:gap-5">
         {/* Drinks Stats */}
-        <div className="mb-5">
-          <h3 className="section-label mb-2">Drinks</h3>
+        <div className="mb-6">
+          <h3 className="section-label-lg mb-2">Drinks</h3>
           <div className="card divide-y divide-border">
             <StatRow label="Shots Owed" value={stats.drinksTaken} color="text-rose" />
             <StatRow label="Shots Taken" value={stats.drinksConsumed} color="text-whiskey" />
@@ -81,8 +113,8 @@ export default function PlayerProfileTab({ state, playerId, onBack }: Props) {
         </div>
 
         {/* Performance Stats */}
-        <div className="mb-5">
-          <h3 className="section-label mb-2">Performance</h3>
+        <div className="mb-6">
+          <h3 className="section-label-lg mb-2">Performance</h3>
           <div className="card divide-y divide-border">
             <StatRow label="Avg Pts Scored" value={stats.avgPointsScored.toFixed(1)} />
             <StatRow label="Avg Pts Allowed" value={stats.avgPointsAllowed.toFixed(1)} />

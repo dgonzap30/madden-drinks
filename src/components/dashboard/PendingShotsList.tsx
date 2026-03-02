@@ -59,8 +59,8 @@ export default function PendingShotsList({ state, dispatch }: Props) {
   const debtors = [...grouped.values()].sort((a, b) => b.totalPending - a.totalPending)
 
   return (
-    <div className="mb-5">
-      <h3 className="section-label mb-2">Outstanding Shots</h3>
+    <div className="mb-6">
+      <h3 className="section-label-lg mb-2">Outstanding Shots</h3>
       <div className="space-y-2">
         {debtors.map((debtor) => {
           const isExpanded = expandedPlayer === debtor.playerId
@@ -73,13 +73,33 @@ export default function PendingShotsList({ state, dispatch }: Props) {
               >
                 <div className="flex items-center gap-2">
                   <span className="font-semibold text-sm text-text-primary">{debtor.playerName}</span>
-                  <span className="text-text-muted text-xs">owes</span>
+                  <span className="text-text-tertiary text-xs">owes</span>
+                  {debtor.totalPending > 0 && (
+                    <span
+                      role="button"
+                      tabIndex={0}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        dispatch({ type: 'BULK_FULFILL_DRINKS', loserId: debtor.playerId })
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.stopPropagation()
+                          e.preventDefault()
+                          dispatch({ type: 'BULK_FULFILL_DRINKS', loserId: debtor.playerId })
+                        }
+                      }}
+                      className="text-xs text-amber hover:text-amber/80 font-medium cursor-pointer"
+                    >
+                      Mark All Done
+                    </span>
+                  )}
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="score-jumbo text-xl text-whiskey">{debtor.totalPending}</span>
-                  <span className="text-text-muted text-xs">{debtor.totalPending === 1 ? 'shot' : 'shots'}</span>
+                  <span className="text-text-tertiary text-xs">{debtor.totalPending === 1 ? 'shot' : 'shots'}</span>
                   <svg
-                    className={`w-4 h-4 text-text-muted transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                    className={`w-4 h-4 text-text-tertiary transition-transform ${isExpanded ? 'rotate-180' : ''}`}
                     viewBox="0 0 16 16"
                     fill="none"
                     stroke="currentColor"
@@ -96,12 +116,12 @@ export default function PendingShotsList({ state, dispatch }: Props) {
               {isExpanded && (
                 <div className="border-t border-border">
                   {debtor.games.map(({ game, winnerName }) => (
-                    <div key={game.id} className="flex items-center justify-between px-4 py-2.5 border-b border-border last:border-b-0">
+                    <div key={game.id} className="flex items-center justify-between px-4 py-3 border-b border-border last:border-b-0">
                       <div className="flex items-center gap-2 min-w-0">
                         <span className="text-text-secondary text-xs truncate">
                           vs {winnerName}
                         </span>
-                        <span className="text-text-muted text-[10px] shrink-0">
+                        <span className="text-text-tertiary text-[10px] shrink-0">
                           {formatRelativeTime(game.timestamp)}
                         </span>
                       </div>
@@ -123,7 +143,7 @@ export default function PendingShotsList({ state, dispatch }: Props) {
                             }`}
                           />
                         ))}
-                        <span className="text-text-muted text-[10px] font-display ml-0.5">
+                        <span className="text-text-tertiary text-[10px] font-display ml-0.5">
                           {game.drinksFulfilled}/{game.drinksOwed}
                         </span>
                       </div>

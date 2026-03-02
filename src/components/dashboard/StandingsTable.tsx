@@ -8,11 +8,11 @@ interface Props {
 
 export default function StandingsTable({ standings, onSelectPlayer }: Props) {
   return (
-    <div className="mb-5">
-      <h3 className="section-label mb-2">Standings</h3>
+    <div className="mb-6">
+      <h3 className="section-label-lg mb-2">Standings</h3>
       <div className="card overflow-hidden border-l-[3px] border-amber">
         {/* Header */}
-        <div className="flex items-center px-4 py-2 border-b border-border bg-bg-primary/50 text-text-muted text-[10px] uppercase tracking-[0.12em]">
+        <div className="flex items-center px-4 py-2 border-b border-border bg-bg-primary/50 text-text-tertiary text-[10px] uppercase tracking-[0.12em]">
           <div className="w-6 font-display">#</div>
           <div className="flex-1 font-display">Player</div>
           <div className="w-20 text-right font-display">Record</div>
@@ -35,7 +35,7 @@ export default function StandingsTable({ standings, onSelectPlayer }: Props) {
               ) : s.rank === standings.length && s.totalGames > 0 ? (
                 <span className="bg-rose/15 text-rose border border-rose/30 rounded px-1.5 py-0.5 text-xs font-display font-bold">{s.rank}</span>
               ) : (
-                <span className="text-text-muted font-display font-bold text-sm">{s.rank || '-'}</span>
+                <span className="text-text-tertiary font-display font-bold text-sm">{s.rank || '-'}</span>
               )}
             </div>
             <div className="flex-1 flex items-center gap-1.5">
@@ -68,7 +68,7 @@ export default function StandingsTable({ standings, onSelectPlayer }: Props) {
         {standings.length === 0 && (
           <div className="px-4 py-10 text-center">
             <p className="text-amber text-lg font-display font-bold mb-1">First game?</p>
-            <p className="text-text-muted text-xs">Head to Log Game to see standings</p>
+            <p className="text-text-tertiary text-xs">Head to Log Game to see standings</p>
           </div>
         )}
       </div>

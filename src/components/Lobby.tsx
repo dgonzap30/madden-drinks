@@ -101,7 +101,7 @@ export default function Lobby({ onJoin }: LobbyProps) {
                   <span className="flex-1 text-text-primary text-sm font-semibold truncate">
                     {league.name || 'Unnamed League'}
                   </span>
-                  <span className="text-text-muted text-[11px] shrink-0">
+                  <span className="text-text-tertiary text-[11px] shrink-0">
                     {timeAgo(league.lastVisited)}
                   </span>
                   <span
@@ -173,7 +173,7 @@ export default function Lobby({ onJoin }: LobbyProps) {
           </button>
         </div>
 
-        <p className="mt-10 text-text-muted text-[11px] animate-slide-up" style={{ animationDelay: '400ms' }}>
+        <p className="mt-10 text-text-tertiary text-[11px] animate-slide-up" style={{ animationDelay: '400ms' }}>
           1-score game = 1 drink &middot; 2-score game = 2 drinks
         </p>
       </div>

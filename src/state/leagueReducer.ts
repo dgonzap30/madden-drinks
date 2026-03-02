@@ -9,6 +9,8 @@ export type LeagueAction =
   | { type: 'FULFILL_DRINK'; gameId: string }
   | { type: 'UNFULFILL_DRINK'; gameId: string }
   | { type: 'UNDO_LAST_GAME' }
+  | { type: 'DELETE_GAME'; gameId: string }
+  | { type: 'BULK_FULFILL_DRINKS'; loserId: string }
   | { type: 'RESET_LEAGUE' }
   | { type: 'LOAD_STATE'; state: LeagueState }
 
@@ -137,6 +139,23 @@ export function leagueReducer(state: LeagueState, action: LeagueAction): LeagueS
     case 'UNDO_LAST_GAME': {
       if (state.games.length === 0) return state
       return { ...state, games: state.games.slice(0, -1) }
+    }
+
+    case 'DELETE_GAME': {
+      const exists = state.games.some((g) => g.id === action.gameId)
+      if (!exists) return state
+      return { ...state, games: state.games.filter((g) => g.id !== action.gameId) }
+    }
+
+    case 'BULK_FULFILL_DRINKS': {
+      const updated = state.games.map((g) => {
+        if (g.loserId === action.loserId && g.winnerId !== null && g.drinksFulfilled < g.drinksOwed) {
+          return { ...g, drinksFulfilled: g.drinksOwed }
+        }
+        return g
+      })
+      if (updated === state.games) return state
+      return { ...state, games: updated }
     }
 
     case 'RESET_LEAGUE':

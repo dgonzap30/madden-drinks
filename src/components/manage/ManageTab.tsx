@@ -26,14 +26,14 @@ export default function ManageTab({ state, roomId, dispatch }: Props) {
   }
 
   return (
-    <div className="max-w-md mx-auto px-4 pt-4 pb-24">
+    <div className="max-w-md lg:max-w-4xl xl:max-w-5xl mx-auto px-4 pt-4 pb-28">
       <h2 className="text-xl font-display font-bold tracking-wide mb-4 text-text-primary">
         Manage
       </h2>
 
       {/* League Code */}
-      <div className="card p-4 mb-4">
-        <div className="section-label mb-2">League Code</div>
+      <div className="card p-4 mb-6">
+        <div className="section-label-lg mb-2">League Code</div>
         <div className="flex items-center gap-3">
           <span className="score-jumbo text-3xl tracking-[0.3em] text-gradient-gold">
             {roomId}
@@ -47,44 +47,48 @@ export default function ManageTab({ state, roomId, dispatch }: Props) {
         </div>
       </div>
 
-      {/* Player Roster */}
-      <div className="mb-4">
-        <h3 className="section-label mb-2">
-          Players ({state.players.length})
-        </h3>
-        <div className="space-y-1.5 mb-3">
-          {state.players.map((p) => {
-            const hasGames = state.games.some(
-              (g) => g.player1Id === p.id || g.player2Id === p.id
-            )
-            return (
-              <div key={p.id} className="flex items-center justify-between px-4 py-2.5 card border-l-2 border-l-amber/20">
-                <span className="font-semibold text-sm">{p.name}</span>
-                {!hasGames && (
-                  <button
-                    onClick={() => dispatch({ type: 'REMOVE_PLAYER', playerId: p.id })}
-                    className="text-text-muted hover:text-rose transition-colors text-lg leading-none"
-                  >
-                    &times;
-                  </button>
-                )}
-              </div>
-            )
-          })}
+      {/* Two-column layout on desktop */}
+      <div className="lg:grid lg:grid-cols-2 lg:gap-6">
+        {/* Left: Player Roster */}
+        <div className="mb-6">
+          <h3 className="section-label-lg mb-2">
+            Players ({state.players.length})
+          </h3>
+          <div className="space-y-2 mb-3">
+            {state.players.map((p) => {
+              const hasGames = state.games.some(
+                (g) => g.player1Id === p.id || g.player2Id === p.id
+              )
+              return (
+                <div key={p.id} className="flex items-center justify-between px-4 py-3 card border-l-2 border-l-amber/35">
+                  <span className="font-semibold text-sm">{p.name}</span>
+                  {!hasGames && (
+                    <button
+                      onClick={() => dispatch({ type: 'REMOVE_PLAYER', playerId: p.id })}
+                      className="text-text-muted hover:text-rose transition-colors text-lg leading-none"
+                    >
+                      &times;
+                    </button>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+          <AddPlayerForm dispatch={dispatch} />
         </div>
-        <AddPlayerForm dispatch={dispatch} />
-      </div>
 
+        {/* Right: Settings + Danger Zone */}
+        <div>
       {/* Undo Last Game */}
       {state.games.length > 0 && (
-        <div className="mb-4">
+        <div className="mb-6">
           <button
             onClick={undoLast}
             className="w-full h-11 rounded-xl bg-bg-input border border-border text-text-secondary text-sm font-display font-semibold hover:border-amber/40 hover:text-amber transition-all active:scale-[0.98]"
           >
             Undo Last Game
           </button>
-          <p className="text-text-muted text-[10px] text-center mt-1">
+          <p className="text-text-tertiary text-[10px] text-center mt-1">
             Remove the most recently logged game
           </p>
         </div>
@@ -129,6 +133,8 @@ export default function ManageTab({ state, roomId, dispatch }: Props) {
             </div>
           </div>
         )}
+      </div>
+        </div>
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { Player } from '../../types/league.ts'
+import type { Player, GameRecord } from '../../types/league.ts'
 import type { LeagueAction } from '../../state/leagueReducer.ts'
 import { calculateDrinksOwed, describeDrinks } from '../../utils/drinkCalc.ts'
 import PlayerPicker from './PlayerPicker.tsx'
@@ -9,6 +9,7 @@ import DrinkPreview from './DrinkPreview.tsx'
 
 interface Props {
   players: Player[]
+  games: GameRecord[]
   dispatch: (action: LeagueAction) => void
   onLogged: () => void
 }
@@ -24,7 +25,7 @@ interface LoggedDetails {
   team2: string | null
 }
 
-export default function LogGameTab({ players, dispatch, onLogged }: Props) {
+export default function LogGameTab({ players, games, dispatch, onLogged }: Props) {
   const [player1Id, setPlayer1Id] = useState<string | null>(null)
   const [player2Id, setPlayer2Id] = useState<string | null>(null)
   const [team1, setTeam1] = useState<string | null>(null)
@@ -127,13 +128,14 @@ export default function LogGameTab({ players, dispatch, onLogged }: Props) {
   }
 
   return (
-    <div className="max-w-md mx-auto px-4 pt-4 pb-24">
+    <div className="max-w-md lg:max-w-4xl xl:max-w-5xl mx-auto px-4 pt-4 pb-28">
       <h2 className="text-xl font-display font-bold tracking-wide mb-4 text-text-primary">
         Log Game
       </h2>
 
       <PlayerPicker
         players={players}
+        games={games}
         player1={player1}
         player2={player2}
         onSelect1={setPlayer1Id}

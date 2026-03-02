@@ -35,7 +35,7 @@ function ScoreField({
 
   return (
     <div>
-      <label className="section-label mb-1.5 flex items-center gap-1.5">
+      <label className="section-label-lg mb-1.5 flex items-center gap-1.5">
         {label}
         {team && (
           <span
@@ -100,7 +100,7 @@ function ScoreField({
           >
             <span>{s}</span>
             {opponentScore !== null && opponentScore !== undefined && (
-              <div className="text-[7px] text-text-muted mt-0.5">
+              <div className="text-[7px] text-text-tertiary mt-0.5">
                 {calculateDrinksOwed(s, opponentScore) || '-'}
               </div>
             )}
@@ -119,31 +119,35 @@ export default function ScoreInput({ player1Name, player2Name, team1, team2, sco
   const p2Losing = bothSet && score2! < score1!
 
   return (
-    <div className="card p-4 pt-5">
-      <div className="space-y-5">
-        <ScoreField
-          label={player1Name}
-          teamAbbr={team1}
-          value={score1}
-          opponentScore={score2}
-          isWinning={p1Winning}
-          isLosing={p1Losing}
-          onChange={onScore1}
-        />
-        <div className="flex items-center gap-3 py-2">
-          <div className="flex-1 border-t divider-warm" />
-          <span className="font-display font-bold text-text-muted tracking-widest text-sm">VS</span>
-          <div className="flex-1 border-t divider-warm" />
+    <div className="card p-4">
+      <div className="lg:flex lg:gap-8 lg:items-start">
+        <div className="flex-1">
+          <ScoreField
+            label={player1Name}
+            teamAbbr={team1}
+            value={score1}
+            opponentScore={score2}
+            isWinning={p1Winning}
+            isLosing={p1Losing}
+            onChange={onScore1}
+          />
         </div>
-        <ScoreField
-          label={player2Name}
-          teamAbbr={team2}
-          value={score2}
-          opponentScore={score1}
-          isWinning={p2Winning}
-          isLosing={p2Losing}
-          onChange={onScore2}
-        />
+        <div className="flex items-center gap-3 py-2 lg:py-0 lg:pt-8 lg:flex-col lg:gap-1">
+          <div className="flex-1 border-t divider-warm lg:hidden" />
+          <span className="font-display font-bold text-text-muted tracking-widest text-sm">VS</span>
+          <div className="flex-1 border-t divider-warm lg:hidden" />
+        </div>
+        <div className="flex-1">
+          <ScoreField
+            label={player2Name}
+            teamAbbr={team2}
+            value={score2}
+            opponentScore={score1}
+            isWinning={p2Winning}
+            isLosing={p2Losing}
+            onChange={onScore2}
+          />
+        </div>
       </div>
     </div>
   )

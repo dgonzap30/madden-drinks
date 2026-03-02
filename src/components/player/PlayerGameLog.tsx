@@ -13,8 +13,8 @@ export default function PlayerGameLog({ games, playerId, players }: Props) {
   const getName = (id: string) => players.find((p) => p.id === id)?.name ?? '???'
 
   return (
-    <div className="mb-5">
-      <h3 className="section-label mb-2">Game Log</h3>
+    <div className="mb-6">
+      <h3 className="section-label-lg mb-2">Game Log</h3>
       <div className="card divide-y divide-border">
         {games.slice(0, 20).map((game) => {
           const oppId = game.player1Id === playerId ? game.player2Id : game.player1Id
@@ -27,9 +27,9 @@ export default function PlayerGameLog({ games, playerId, players }: Props) {
           const isTie = game.winnerId === null
 
           return (
-            <div key={game.id} className="flex items-center px-4 py-2.5">
+            <div key={game.id} className="flex items-center px-4 py-3">
               <div className={`w-7 text-[10px] font-bold font-display rounded px-1 py-0.5 text-center ${
-                won ? 'bg-amber/20 text-amber' : lost ? 'bg-rose/20 text-rose' : 'bg-border text-text-muted'
+                won ? 'bg-amber/20 text-amber' : lost ? 'bg-rose/20 text-rose' : 'bg-border text-text-tertiary'
               }`}>
                 {won ? 'W' : lost ? 'L' : 'T'}
               </div>
@@ -47,10 +47,10 @@ export default function PlayerGameLog({ games, playerId, players }: Props) {
               <div className="text-sm font-display score-display mr-3 shrink-0">
                 {myScore}-{oppScore}
               </div>
-              <div className="text-text-muted text-[10px] w-16 text-right shrink-0">
+              <div className="text-text-tertiary text-[10px] w-16 text-right shrink-0">
                 {isTie ? '' : lost ? describeFulfillment(game.drinksFulfilled, game.drinksOwed) : ''}
               </div>
-              <div className="text-text-muted font-display text-[10px] w-16 text-right shrink-0">{formatDate(game.timestamp)}</div>
+              <div className="text-text-tertiary font-display text-[10px] w-16 text-right shrink-0">{formatDate(game.timestamp)}</div>
             </div>
           )
         })}

@@ -11,8 +11,8 @@ export default function RecentGamesList({ games, players }: Props) {
   const getName = (id: string) => players.find((p) => p.id === id)?.name ?? '???'
 
   return (
-    <div className="mb-5">
-      <h3 className="section-label mb-2">Recent Games</h3>
+    <div className="mb-6">
+      <h3 className="section-label-lg mb-2">Recent Games</h3>
       <div className="space-y-2">
         {games.map((game, i) => {
           const p1Name = getName(game.player1Id)
@@ -41,7 +41,7 @@ export default function RecentGamesList({ games, players }: Props) {
                     {p2Name}
                   </span>
                 </div>
-                <div className="text-text-muted text-[10px] shrink-0 ml-2">{formatRelativeTime(game.timestamp)}</div>
+                <div className="text-text-tertiary text-[10px] shrink-0 ml-2">{formatRelativeTime(game.timestamp)}</div>
               </div>
               {!isTie && loserName && game.drinksOwed > 0 && (
                 <div className="flex items-center gap-2 mt-1">
@@ -64,7 +64,7 @@ export default function RecentGamesList({ games, players }: Props) {
                 </div>
               )}
               {isTie && (
-                <div className="text-text-muted text-xs mt-1">Tie — no shots</div>
+                <div className="text-text-tertiary text-xs mt-1">Tie — no shots</div>
               )}
             </div>
           )

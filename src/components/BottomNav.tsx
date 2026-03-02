@@ -3,6 +3,7 @@ export type Tab = 'dashboard' | 'log' | 'history' | 'manage'
 interface Props {
   active: Tab
   onChange: (tab: Tab) => void
+  leagueName?: string
 }
 
 const tabs: { id: Tab; label: string }[] = [
@@ -12,10 +13,10 @@ const tabs: { id: Tab; label: string }[] = [
   { id: 'manage', label: 'Manage' },
 ]
 
-function TabIcon({ id }: { id: Tab }) {
+function TabIcon({ id, size = 20 }: { id: Tab; size?: number }) {
   const props = {
-    width: 20,
-    height: 20,
+    width: size,
+    height: size,
     viewBox: '0 0 24 24',
     fill: 'none',
     stroke: 'currentColor',
@@ -72,33 +73,80 @@ function TabIcon({ id }: { id: Tab }) {
   }
 }
 
-export default function BottomNav({ active, onChange }: Props) {
+export default function BottomNav({ active, onChange, leagueName }: Props) {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-20 bg-bg-primary/90 backdrop-blur-xl border-t border-border pb-[env(safe-area-inset-bottom)]">
-      <div className="flex items-stretch max-w-lg mx-auto">
-        {tabs.map((tab) => {
-          const isActive = active === tab.id
-          return (
-            <button
-              key={tab.id}
-              onClick={() => onChange(tab.id)}
-              className={`relative flex-1 flex flex-col items-center justify-center h-14 transition-colors ${
-                isActive
-                  ? 'text-amber'
-                  : 'text-text-muted hover:text-text-secondary'
-              }`}
-            >
-              <TabIcon id={tab.id} />
-              <span className="text-[10px] font-display tracking-wide mt-0.5">
-                {tab.label}
-              </span>
-              {isActive && (
-                <span className="absolute bottom-0 w-5 h-[3px] rounded-full bg-amber animate-tab-indicator" />
-              )}
-            </button>
-          )
-        })}
-      </div>
-    </nav>
+    <>
+      {/* Mobile / Tablet: Bottom nav bar (hidden on lg+) */}
+      <nav className="fixed bottom-0 left-0 right-0 z-20 bg-bg-primary/90 backdrop-blur-xl border-t border-border pb-[env(safe-area-inset-bottom)] lg:hidden">
+        <div className="flex items-stretch max-w-lg mx-auto">
+          {tabs.map((tab) => {
+            const isActive = active === tab.id
+            return (
+              <button
+                key={tab.id}
+                onClick={() => onChange(tab.id)}
+                className={`relative flex-1 flex flex-col items-center justify-center h-14 transition-colors ${
+                  isActive
+                    ? 'text-amber'
+                    : 'text-text-muted hover:text-text-secondary'
+                }`}
+              >
+                <TabIcon id={tab.id} />
+                <span className="text-[10px] font-display tracking-wide mt-0.5">
+                  {tab.label}
+                </span>
+                {isActive && (
+                  <span className="absolute bottom-0 w-5 h-[3px] rounded-full bg-amber animate-tab-indicator" />
+                )}
+              </button>
+            )
+          })}
+        </div>
+      </nav>
+
+      {/* Desktop: Left sidebar (hidden below lg) */}
+      <nav className="hidden lg:flex fixed left-0 top-0 bottom-0 z-20 w-[200px] bg-bg-primary border-r border-border flex-col">
+        {/* App title */}
+        <div className="px-5 pt-6 pb-8">
+          <h1 className="font-display font-black text-xl uppercase tracking-wide text-gradient-gold leading-tight">
+            Madden<br />Drinks
+          </h1>
+        </div>
+
+        {/* Nav items */}
+        <div className="flex-1 flex flex-col gap-1 px-2">
+          {tabs.map((tab) => {
+            const isActive = active === tab.id
+            return (
+              <button
+                key={tab.id}
+                onClick={() => onChange(tab.id)}
+                className={`relative flex items-center gap-3 w-full px-3 py-2.5 rounded-lg transition-colors text-left ${
+                  isActive
+                    ? 'text-amber bg-amber/[0.08]'
+                    : 'text-text-muted hover:text-text-secondary hover:bg-bg-surface-hover'
+                }`}
+              >
+                {isActive && (
+                  <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-r-full bg-amber animate-tab-indicator" />
+                )}
+                <TabIcon id={tab.id} size={18} />
+                <span className="font-display font-bold text-sm tracking-wide">
+                  {tab.label}
+                </span>
+              </button>
+            )
+          })}
+        </div>
+
+        {/* Bottom section: league name */}
+        {leagueName && (
+          <div className="px-5 py-4 border-t border-border">
+            <p className="text-[10px] font-display tracking-widest uppercase text-text-muted mb-0.5">League</p>
+            <p className="text-xs text-text-tertiary font-semibold truncate">{leagueName}</p>
+          </div>
+        )}
+      </nav>
+    </>
   )
 }

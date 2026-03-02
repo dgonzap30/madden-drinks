@@ -47,7 +47,7 @@ export default function DrinkPreview({ player1Name, player2Name, team1, team2, s
       {/* Score Display */}
       <div className="flex items-center justify-center gap-6 mb-3 pt-1">
         <div className="text-center">
-          <div className="section-label mb-1 flex items-center justify-center gap-1">
+          <div className="section-label-lg mb-1 flex items-center justify-center gap-1">
             {player1Name}
             {team1 && <TeamBadge abbr={team1} />}
           </div>
@@ -59,7 +59,7 @@ export default function DrinkPreview({ player1Name, player2Name, team1, team2, s
         </div>
         <div className="text-text-muted text-sm font-semibold">-</div>
         <div className="text-center">
-          <div className="section-label mb-1 flex items-center justify-center gap-1">
+          <div className="section-label-lg mb-1 flex items-center justify-center gap-1">
             {player2Name}
             {team2 && <TeamBadge abbr={team2} />}
           </div>
@@ -99,7 +99,7 @@ export default function DrinkPreview({ player1Name, player2Name, team1, team2, s
                 {describeDrinks(drinks)}
               </span>
               {winnerName && (
-                <div className="text-[11px] text-text-muted font-normal mt-0.5">
+                <div className="text-[11px] text-text-tertiary font-normal mt-0.5">
                   {winnerName} wins
                 </div>
               )}

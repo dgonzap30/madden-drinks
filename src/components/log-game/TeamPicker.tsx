@@ -83,9 +83,11 @@ function TeamSelector({
 export default function TeamPicker({ player1Name, player2Name, team1, team2, onTeam1, onTeam2 }: Props) {
   return (
     <div className="card p-4 space-y-4">
-      <div className="section-label mb-0">NFL Teams <span className="text-text-muted/50 normal-case tracking-normal">(optional)</span></div>
-      <TeamSelector label={player1Name} selected={team1} onSelect={onTeam1} />
-      <TeamSelector label={player2Name} selected={team2} onSelect={onTeam2} />
+      <div className="section-label-lg mb-0">NFL Teams <span className="text-text-muted/50 normal-case tracking-normal">(optional)</span></div>
+      <div className="lg:grid lg:grid-cols-2 lg:gap-6">
+        <TeamSelector label={player1Name} selected={team1} onSelect={onTeam1} />
+        <TeamSelector label={player2Name} selected={team2} onSelect={onTeam2} />
+      </div>
     </div>
   )
 }
