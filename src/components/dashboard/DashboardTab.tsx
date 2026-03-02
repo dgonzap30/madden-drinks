@@ -60,14 +60,12 @@ export default function DashboardTab({ state, dispatch, onSelectPlayer, onNaviga
         </div>
       )}
 
-      {/* Pending Shots */}
-      <PendingShotsList state={state} dispatch={dispatch} />
-
       {/* Two-column grid on desktop */}
-      <div className="md:grid md:grid-cols-2 md:gap-5 lg:grid-cols-3 lg:gap-6">
-        {/* Left: Standings */}
+      <div className="lg:grid lg:grid-cols-[1fr_1.4fr] lg:gap-6">
+        {/* Left: Standings + Outstanding Shots */}
         <div>
           <StandingsTable standings={standings} onSelectPlayer={onSelectPlayer} />
+          <PendingShotsList state={state} dispatch={dispatch} />
         </div>
 
         {/* Right: Recent Games + Records */}

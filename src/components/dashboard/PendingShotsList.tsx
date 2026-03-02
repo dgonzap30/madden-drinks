@@ -74,26 +74,6 @@ export default function PendingShotsList({ state, dispatch }: Props) {
                 <div className="flex items-center gap-2">
                   <span className="font-semibold text-sm text-text-primary">{debtor.playerName}</span>
                   <span className="text-text-tertiary text-xs">owes</span>
-                  {debtor.totalPending > 0 && (
-                    <span
-                      role="button"
-                      tabIndex={0}
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        dispatch({ type: 'BULK_FULFILL_DRINKS', loserId: debtor.playerId })
-                      }}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.stopPropagation()
-                          e.preventDefault()
-                          dispatch({ type: 'BULK_FULFILL_DRINKS', loserId: debtor.playerId })
-                        }
-                      }}
-                      className="text-xs text-amber hover:text-amber/80 font-medium cursor-pointer"
-                    >
-                      Mark All Done
-                    </span>
-                  )}
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="score-jumbo text-xl text-whiskey">{debtor.totalPending}</span>
@@ -149,6 +129,16 @@ export default function PendingShotsList({ state, dispatch }: Props) {
                       </div>
                     </div>
                   ))}
+                  {/* Bulk action footer */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      dispatch({ type: 'BULK_FULFILL_DRINKS', loserId: debtor.playerId })
+                    }}
+                    className="w-full px-4 py-2.5 text-xs text-amber hover:bg-amber/[0.06] transition-colors font-medium border-t border-border text-center"
+                  >
+                    Mark all {debtor.totalPending} shots as done
+                  </button>
                 </div>
               )}
             </div>
