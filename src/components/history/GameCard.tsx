@@ -21,6 +21,8 @@ export default function GameCard({ game, players, dispatch, onToast, onDelete }:
   const isTie = game.winnerId === null
   const loserName = game.loserId ? getName(game.loserId) : null
   const allFulfilled = game.drinksFulfilled >= game.drinksOwed
+  const banked = game.drinksBanked
+  const drunk = game.drinksFulfilled - banked
 
   return (
     <div className="card px-4 py-3 relative">
@@ -86,23 +88,37 @@ export default function GameCard({ game, players, dispatch, onToast, onDelete }:
                 {loserName} owes {game.drinksOwed} {game.drinksOwed === 1 ? 'shot' : 'shots'}
               </span>
               <div className="flex gap-1">
-                {Array.from({ length: game.drinksOwed }).map((_, i) => (
+                {/* Drunk shots (whiskey) */}
+                {Array.from({ length: drunk }).map((_, i) => (
                   <button
-                    key={i}
+                    key={`d-${i}`}
                     onClick={() => {
-                      if (i < game.drinksFulfilled) {
-                        dispatch({ type: 'UNFULFILL_DRINK', gameId: game.id })
-                        onToast?.('Shot unmarked')
-                      } else {
-                        dispatch({ type: 'FULFILL_DRINK', gameId: game.id })
-                        onToast?.('Shot marked')
-                      }
+                      dispatch({ type: 'UNFULFILL_DRINK', gameId: game.id })
+                      onToast?.('Shot unmarked')
                     }}
-                    className={`w-6 h-6 rounded-full transition-all hover:scale-110 active:scale-90 ${
-                      i < game.drinksFulfilled
-                        ? 'bg-whiskey shadow-[0_0_6px_-1px] shadow-whiskey-glow'
-                        : 'bg-border hover:bg-border-bright'
-                    }`}
+                    className="w-6 h-6 rounded-full transition-all hover:scale-110 active:scale-90 bg-whiskey shadow-[0_0_6px_-1px] shadow-whiskey-glow"
+                  />
+                ))}
+                {/* Banked shots (muted with B) */}
+                {Array.from({ length: banked }).map((_, i) => (
+                  <button
+                    key={`b-${i}`}
+                    onClick={() => onToast?.('Undo banks from Outstanding Shots')}
+                    className="w-6 h-6 rounded-full transition-all hover:scale-110 active:scale-90 bg-text-muted/40 ring-1 ring-text-muted/60 flex items-center justify-center"
+                    title="Banked"
+                  >
+                    <span className="text-[9px] font-bold text-text-tertiary leading-none">B</span>
+                  </button>
+                ))}
+                {/* Pending shots */}
+                {Array.from({ length: game.drinksOwed - game.drinksFulfilled }).map((_, i) => (
+                  <button
+                    key={`p-${i}`}
+                    onClick={() => {
+                      dispatch({ type: 'FULFILL_DRINK', gameId: game.id })
+                      onToast?.('Shot marked')
+                    }}
+                    className="w-6 h-6 rounded-full transition-all hover:scale-110 active:scale-90 bg-border hover:bg-border-bright"
                   />
                 ))}
               </div>

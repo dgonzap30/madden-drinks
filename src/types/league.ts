@@ -12,6 +12,7 @@ export interface GameRecord {
   score2: number
   drinksOwed: number
   drinksFulfilled: number
+  drinksBanked: number
   winnerId: string | null
   loserId: string | null
   timestamp: number
@@ -38,6 +39,8 @@ export interface PlayerStats {
   drinksGiven: number
   netDrinks: number
   drinksConsumed: number
+  drinksBanked: number
+  drinksActuallyDrunk: number
   drinksPending: number
   currentWinStreak: number
   currentLossStreak: number

@@ -10,6 +10,8 @@ export type LeagueAction =
   | { type: 'UNFULFILL_DRINK'; gameId: string }
   | { type: 'UNDO_LAST_GAME' }
   | { type: 'DELETE_GAME'; gameId: string }
+  | { type: 'BANK_DRINK'; loserGameId: string; counterpartGameId: string }
+  | { type: 'UNBANK_DRINK'; loserGameId: string; counterpartGameId: string }
   | { type: 'BULK_FULFILL_DRINKS'; loserId: string }
   | { type: 'RESET_LEAGUE' }
   | { type: 'LOAD_STATE'; state: LeagueState }
@@ -38,6 +40,7 @@ export function migrateState(saved: Partial<LeagueState> | undefined | null): Le
       score2: g.score2 ?? 0,
       drinksOwed: g.drinksOwed ?? calculateDrinksOwed(g.score1 ?? 0, g.score2 ?? 0),
       drinksFulfilled: g.drinksFulfilled ?? 0,
+      drinksBanked: g.drinksBanked ?? 0,
       winnerId: g.winnerId ?? null,
       loserId: g.loserId ?? null,
       timestamp: g.timestamp ?? Date.now(),
@@ -103,6 +106,7 @@ export function leagueReducer(state: LeagueState, action: LeagueAction): LeagueS
         score2,
         drinksOwed,
         drinksFulfilled: 0,
+        drinksBanked: 0,
         winnerId: isTie ? null : score1 > score2 ? player1Id : player2Id,
         loserId: isTie ? null : score1 < score2 ? player1Id : player2Id,
         timestamp: Date.now(),
@@ -134,6 +138,62 @@ export function leagueReducer(state: LeagueState, action: LeagueAction): LeagueS
       const updated = { ...game, drinksFulfilled: game.drinksFulfilled - 1 }
       const games = [...state.games]
       games[gameIdx] = updated
+      return { ...state, games }
+    }
+
+    case 'BANK_DRINK': {
+      const loserIdx = state.games.findIndex((g) => g.id === action.loserGameId)
+      const counterIdx = state.games.findIndex((g) => g.id === action.counterpartGameId)
+      if (loserIdx === -1 || counterIdx === -1) return state
+
+      const loserGame = state.games[loserIdx]
+      const counterGame = state.games[counterIdx]
+
+      // Both must have pending shots
+      if (loserGame.drinksFulfilled >= loserGame.drinksOwed) return state
+      if (counterGame.drinksFulfilled >= counterGame.drinksOwed) return state
+
+      // Must be same matchup with opposite winners
+      if (loserGame.loserId !== counterGame.winnerId) return state
+      if (loserGame.winnerId !== counterGame.loserId) return state
+
+      const games = [...state.games]
+      games[loserIdx] = {
+        ...loserGame,
+        drinksFulfilled: loserGame.drinksFulfilled + 1,
+        drinksBanked: loserGame.drinksBanked + 1,
+      }
+      games[counterIdx] = {
+        ...counterGame,
+        drinksFulfilled: counterGame.drinksFulfilled + 1,
+        drinksBanked: counterGame.drinksBanked + 1,
+      }
+      return { ...state, games }
+    }
+
+    case 'UNBANK_DRINK': {
+      const loserIdx = state.games.findIndex((g) => g.id === action.loserGameId)
+      const counterIdx = state.games.findIndex((g) => g.id === action.counterpartGameId)
+      if (loserIdx === -1 || counterIdx === -1) return state
+
+      const loserGame = state.games[loserIdx]
+      const counterGame = state.games[counterIdx]
+
+      // Both must have banked shots to undo
+      if (loserGame.drinksBanked <= 0) return state
+      if (counterGame.drinksBanked <= 0) return state
+
+      const games = [...state.games]
+      games[loserIdx] = {
+        ...loserGame,
+        drinksFulfilled: loserGame.drinksFulfilled - 1,
+        drinksBanked: loserGame.drinksBanked - 1,
+      }
+      games[counterIdx] = {
+        ...counterGame,
+        drinksFulfilled: counterGame.drinksFulfilled - 1,
+        drinksBanked: counterGame.drinksBanked - 1,
+      }
       return { ...state, games }
     }
 

@@ -82,7 +82,7 @@ export default function LogGameTab({ players, games, dispatch, onLogged }: Props
 
   if (logged) {
     return (
-      <div className="flex flex-col items-center justify-center pt-20 animate-slide-up">
+      <div className="flex flex-col items-center justify-center pt-20 animate-slide-up max-w-md mx-auto">
         <div className="w-16 h-16 mb-6 rounded-full bg-amber/20 flex items-center justify-center animate-celebrate animate-pulse-glow">
           <span className="text-amber text-3xl">&#10003;</span>
         </div>
@@ -128,7 +128,7 @@ export default function LogGameTab({ players, games, dispatch, onLogged }: Props
   }
 
   return (
-    <div className="max-w-md lg:max-w-4xl xl:max-w-5xl mx-auto px-4 pt-4 pb-28">
+    <div className="max-w-md lg:max-w-3xl mx-auto px-4 pt-4 pb-28">
       <h2 className="text-xl font-display font-bold tracking-wide mb-4 text-text-primary">
         Log Game
       </h2>
@@ -145,6 +145,7 @@ export default function LogGameTab({ players, games, dispatch, onLogged }: Props
       {player1 && player2 && player1.id !== player2.id && (
         <>
           <div className="mt-4 animate-slide-up">
+            <div className="section-label text-[10px] mb-1.5 text-text-muted">2 &middot; Teams</div>
             <TeamPicker
               player1Name={player1.name}
               player2Name={player2.name}
@@ -156,6 +157,7 @@ export default function LogGameTab({ players, games, dispatch, onLogged }: Props
           </div>
 
           <div className="mt-4 animate-slide-up">
+            <div className="section-label text-[10px] mb-1.5 text-text-muted">3 &middot; Score</div>
             <ScoreInput
               player1Name={player1.name}
               player2Name={player2.name}

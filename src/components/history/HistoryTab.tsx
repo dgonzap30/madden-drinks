@@ -145,7 +145,7 @@ export default function HistoryTab({ state, dispatch }: Props) {
         </div>
       ) : (
         state.games.length === 0 ? (
-          <div className="text-center pt-16">
+          <div className="card-featured p-8 text-center mt-4">
             <div className="score-jumbo text-5xl text-text-muted/30 mb-4">0-0</div>
             <p className="text-text-secondary text-sm font-semibold mb-1">No games in the books</p>
             <p className="text-text-tertiary text-xs">Results will appear here after you log them</p>

@@ -40,12 +40,12 @@ export default function StandingsTable({ standings, onSelectPlayer }: Props) {
             </div>
             <div className="flex-1 flex items-center gap-1.5">
               <span className="font-semibold text-[15px]">{s.playerName}</span>
-              {s.currentWinStreak >= 3 && (
+              {s.currentWinStreak >= 2 && (
                 <span className="text-[9px] bg-amber/20 text-amber px-1.5 py-0.5 rounded font-bold shadow-[0_0_8px_-2px] shadow-amber-glow">
                   W{s.currentWinStreak}
                 </span>
               )}
-              {s.currentLossStreak >= 3 && (
+              {s.currentLossStreak >= 2 && (
                 <span className="text-[9px] bg-rose/20 text-rose px-1.5 py-0.5 rounded font-bold shadow-[0_0_8px_-2px] shadow-rose-glow">
                   L{s.currentLossStreak}
                 </span>

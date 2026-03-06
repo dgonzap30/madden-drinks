@@ -1,0 +1,16 @@
+{
+  "name": "Madden Drinks",
+  "short_name": "Madden Drinks",
+  "description": "Lifetime Madden drinking game tracker",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090B",
+  "theme_color": "#09090B",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ]
+}

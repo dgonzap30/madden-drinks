@@ -68,7 +68,7 @@ export default function Lobby({ onJoin }: LobbyProps) {
       {/* Ambient spotlight */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-amber/[0.03] rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-sm md:max-w-md w-full text-center relative z-10">
+      <div className="max-w-sm md:max-w-md lg:max-w-lg w-full text-center relative z-10">
         {/* Title */}
         <div className="mb-8 animate-slide-up" style={{ animationDelay: '0ms' }}>
           <h1 className="text-5xl font-display font-black uppercase tracking-wide text-gradient-gold">

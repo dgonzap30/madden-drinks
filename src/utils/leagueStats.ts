@@ -5,13 +5,62 @@ function getPlayerScore(game: GameRecord, playerId: string): { scored: number; a
   return { scored: game.score2, allowed: game.score1 }
 }
 
+export interface MatchupBalance {
+  aOwesB: number
+  bOwesA: number
+  bankableCount: number
+  aLostGames: GameRecord[]
+  bLostGames: GameRecord[]
+}
+
+export function computeMatchupBalance(
+  playerAId: string,
+  playerBId: string,
+  games: GameRecord[]
+): MatchupBalance {
+  const aLostGames: GameRecord[] = []
+  const bLostGames: GameRecord[] = []
+  let aOwesB = 0
+  let bOwesA = 0
+
+  for (const g of games) {
+    const isMatchup =
+      (g.player1Id === playerAId && g.player2Id === playerBId) ||
+      (g.player1Id === playerBId && g.player2Id === playerAId)
+    if (!isMatchup || !g.winnerId) continue
+
+    const pending = g.drinksOwed - g.drinksFulfilled
+    if (pending <= 0) continue
+
+    if (g.loserId === playerAId) {
+      aOwesB += pending
+      aLostGames.push(g)
+    } else if (g.loserId === playerBId) {
+      bOwesA += pending
+      bLostGames.push(g)
+    }
+  }
+
+  // Sort oldest first (FIFO for banking)
+  aLostGames.sort((a, b) => a.timestamp - b.timestamp)
+  bLostGames.sort((a, b) => a.timestamp - b.timestamp)
+
+  return {
+    aOwesB,
+    bOwesA,
+    bankableCount: Math.min(aOwesB, bOwesA),
+    aLostGames,
+    bLostGames,
+  }
+}
+
 export function computePlayerStats(player: Player, games: GameRecord[]): PlayerStats {
   const playerGames = games.filter(
     (g) => g.player1Id === player.id || g.player2Id === player.id
   )
 
   let wins = 0, losses = 0, ties = 0
-  let drinksTaken = 0, drinksGiven = 0, drinksConsumed = 0
+  let drinksTaken = 0, drinksGiven = 0, drinksConsumed = 0, drinksBanked = 0
   let totalPointsScored = 0, totalPointsAllowed = 0
   let currentWinStreak = 0, currentLossStreak = 0
   let longestWinStreak = 0, longestLossStreak = 0
@@ -42,6 +91,7 @@ export function computePlayerStats(player: Player, games: GameRecord[]): PlayerS
       losses++
       drinksTaken += game.drinksOwed
       drinksConsumed += game.drinksFulfilled
+      drinksBanked += game.drinksBanked
       tempLossStreak++
       tempWinStreak = 0
       if (tempLossStreak > longestLossStreak) longestLossStreak = tempLossStreak
@@ -76,6 +126,8 @@ export function computePlayerStats(player: Player, games: GameRecord[]): PlayerS
     drinksGiven,
     netDrinks: drinksGiven - drinksTaken,
     drinksConsumed,
+    drinksBanked,
+    drinksActuallyDrunk: drinksConsumed - drinksBanked,
     drinksPending: drinksTaken - drinksConsumed,
     currentWinStreak,
     currentLossStreak,

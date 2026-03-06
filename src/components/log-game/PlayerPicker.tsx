@@ -44,42 +44,86 @@ export default function PlayerPicker({ players, games, player1, player2, onSelec
       .filter((p): p is Player => p !== undefined && p.id !== player2?.id)
   }, [recentOpponentIds, players, player1, player2])
 
+  const playerBtnClass = (isSelected: boolean, isOtherSelected: boolean) =>
+    `px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 active:scale-95 ${
+      isSelected
+        ? 'bg-amber/15 border border-amber/40 text-amber shadow-[0_0_8px_-2px] shadow-amber-glow'
+        : isOtherSelected
+          ? 'bg-bg-input border border-border text-text-muted opacity-40'
+          : 'bg-bg-input border border-border text-text-primary hover:border-border-bright'
+    }`
+
   return (
     <div className="card p-4">
-      <div className="section-label-lg mb-2">Pick matchup</div>
+      <div className="section-label text-[10px] mb-1.5 text-text-muted">1 &middot; Matchup</div>
+      <div className="section-label-lg mb-3">Pick matchup</div>
 
-      <div className="flex flex-wrap gap-2">
-        {players.map((p) => (
-          <button
-            key={p.id}
-            onClick={() => {
-              if (player1?.id === p.id) {
-                onSelect1(null)
-              } else {
-                onSelect1(p.id)
-                if (player2?.id === p.id) onSelect2(null)
-              }
-            }}
-            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 active:scale-95 ${
-              player1?.id === p.id
-                ? 'bg-amber/15 border border-amber/40 text-amber shadow-[0_0_8px_-2px] shadow-amber-glow'
-                : player2?.id === p.id
-                  ? 'bg-bg-input border border-border text-text-muted opacity-40 transition-all duration-200'
-                  : 'bg-bg-input border border-border text-text-primary hover:border-border-bright'
-            }`}
-          >
-            {p.name}
-          </button>
-        ))}
-      </div>
+      <div className="lg:grid lg:grid-cols-[1fr_auto_1fr] lg:gap-5">
+        {/* Player 1 Column */}
+        <div>
+          <div className="section-label mb-2 lg:block hidden">Player 1</div>
+          <div className="flex flex-wrap gap-2">
+            {players.map((p) => (
+              <button
+                key={p.id}
+                onClick={() => {
+                  if (player1?.id === p.id) {
+                    onSelect1(null)
+                  } else {
+                    onSelect1(p.id)
+                    if (player2?.id === p.id) onSelect2(null)
+                  }
+                }}
+                className={playerBtnClass(player1?.id === p.id, player2?.id === p.id)}
+              >
+                {p.name}
+              </button>
+            ))}
+          </div>
+        </div>
 
-      <div className="text-text-muted text-xs font-display font-bold tracking-widest text-center py-2">VS</div>
+        {/* VS Separator */}
+        <div className="flex items-center gap-3 py-2 lg:py-0 lg:flex-col lg:justify-center lg:px-2">
+          <div className="flex-1 border-t divider-warm lg:hidden" />
+          <div className="hidden lg:block lg:flex-1 lg:border-l divider-warm lg:min-h-[40px]" />
+          <span className="font-display font-bold text-text-muted tracking-widest text-xs">VS</span>
+          <div className="flex-1 border-t divider-warm lg:hidden" />
+          <div className="hidden lg:block lg:flex-1 lg:border-l divider-warm lg:min-h-[40px]" />
+        </div>
 
-      {player1 && recentOpponents.length > 0 && (
-        <div className="mb-2">
-          <div className="section-label mb-1.5">Recent</div>
-          <div className="flex flex-wrap gap-1.5">
-            {recentOpponents.map((p) => (
+        {/* Player 2 Column */}
+        <div>
+          <div className="section-label mb-2 lg:block hidden">Player 2</div>
+
+          {player1 && recentOpponents.length > 0 && (
+            <div className="mb-2">
+              <div className="section-label mb-1.5 text-[9px]">Recent</div>
+              <div className="flex flex-wrap gap-1.5">
+                {recentOpponents.map((p) => (
+                  <button
+                    key={p.id}
+                    onClick={() => {
+                      if (player2?.id === p.id) {
+                        onSelect2(null)
+                      } else {
+                        onSelect2(p.id)
+                      }
+                    }}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 active:scale-95 ${
+                      player2?.id === p.id
+                        ? 'bg-amber/15 border border-amber/40 text-amber shadow-[0_0_8px_-2px] shadow-amber-glow'
+                        : 'bg-bg-input border border-border text-text-primary hover:border-border-bright'
+                    }`}
+                  >
+                    {p.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="flex flex-wrap gap-2">
+            {players.map((p) => (
               <button
                 key={p.id}
                 onClick={() => {
@@ -87,44 +131,16 @@ export default function PlayerPicker({ players, games, player1, player2, onSelec
                     onSelect2(null)
                   } else {
                     onSelect2(p.id)
+                    if (player1?.id === p.id) onSelect1(null)
                   }
                 }}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 active:scale-95 ${
-                  player2?.id === p.id
-                    ? 'bg-amber/15 border border-amber/40 text-amber shadow-[0_0_8px_-2px] shadow-amber-glow'
-                    : 'bg-bg-input border border-border text-text-primary hover:border-border-bright'
-                }`}
+                className={playerBtnClass(player2?.id === p.id, player1?.id === p.id)}
               >
                 {p.name}
               </button>
             ))}
           </div>
         </div>
-      )}
-
-      <div className="flex flex-wrap gap-2">
-        {players.map((p) => (
-          <button
-            key={p.id}
-            onClick={() => {
-              if (player2?.id === p.id) {
-                onSelect2(null)
-              } else {
-                onSelect2(p.id)
-                if (player1?.id === p.id) onSelect1(null)
-              }
-            }}
-            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 active:scale-95 ${
-              player2?.id === p.id
-                ? 'bg-amber/15 border border-amber/40 text-amber shadow-[0_0_8px_-2px] shadow-amber-glow'
-                : player1?.id === p.id
-                  ? 'bg-bg-input border border-border text-text-muted opacity-40 transition-all duration-200'
-                  : 'bg-bg-input border border-border text-text-primary hover:border-border-bright'
-            }`}
-          >
-            {p.name}
-          </button>
-        ))}
       </div>
     </div>
   )
