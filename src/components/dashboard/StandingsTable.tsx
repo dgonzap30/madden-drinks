@@ -10,7 +10,7 @@ export default function StandingsTable({ standings, onSelectPlayer }: Props) {
   return (
     <div className="mb-6">
       <h3 className="section-label-lg mb-2">Standings</h3>
-      <div className="card overflow-hidden border-l-[3px] border-amber">
+      <div className="card overflow-hidden border-l-[4px] border-amber">
         {/* Header */}
         <div className="flex items-center px-4 py-2 border-b border-border bg-bg-primary/50 text-text-tertiary text-[10px] uppercase tracking-[0.12em]">
           <div className="w-6 font-display">#</div>

@@ -86,7 +86,7 @@ export default function LogGameTab({ players, games, dispatch, onLogged }: Props
         <div className="w-16 h-16 mb-6 rounded-full bg-amber/20 flex items-center justify-center animate-celebrate animate-pulse-glow">
           <span className="text-amber text-3xl">&#10003;</span>
         </div>
-        <h3 className="font-display font-black text-3xl text-gradient-gold uppercase tracking-wide mb-4">
+        <h3 className="font-display font-bold text-3xl text-gradient-gold uppercase tracking-wider mb-4">
           Game Logged
         </h3>
 
@@ -112,13 +112,13 @@ export default function LogGameTab({ players, games, dispatch, onLogged }: Props
               resetForm()
               onLogged()
             }}
-            className="flex-1 h-12 rounded-xl bg-bg-input border border-border text-text-primary text-sm font-semibold transition-all active:scale-[0.98] hover:border-border-bright"
+            className="flex-1 h-12 rounded-lg bg-bg-input border border-border text-text-primary text-sm font-semibold transition-all active:scale-[0.98] hover:border-border-bright"
           >
             Back to Standings
           </button>
           <button
             onClick={resetForm}
-            className="flex-1 h-12 rounded-xl bg-amber text-bg-primary text-sm font-bold transition-all active:scale-[0.98] hover:brightness-110"
+            className="flex-1 h-12 rounded-lg bg-amber text-bg-primary text-sm font-bold transition-all active:scale-[0.98] hover:brightness-110"
           >
             Log Another
           </button>
@@ -188,7 +188,7 @@ export default function LogGameTab({ players, games, dispatch, onLogged }: Props
       <button
         onClick={logGame}
         disabled={!canLog}
-        className="w-full h-14 mt-6 rounded-xl btn-shimmer text-bg-primary text-lg font-bold font-display transition-all active:scale-[0.98] disabled:opacity-20 shadow-[0_0_24px_-6px] shadow-amber-glow"
+        className="w-full h-14 mt-6 rounded-lg btn-shimmer text-bg-primary text-lg font-bold font-display transition-all active:scale-[0.98] disabled:opacity-20 shadow-[0_0_24px_-6px] shadow-amber-glow"
       >
         Log Game
       </button>

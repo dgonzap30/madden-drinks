@@ -108,7 +108,7 @@ export default function BottomNav({ active, onChange, leagueName }: Props) {
       <nav className="hidden lg:flex fixed left-0 top-0 bottom-0 z-20 w-[200px] bg-bg-primary border-r border-border flex-col">
         {/* App title */}
         <div className="px-5 pt-6 pb-8">
-          <h1 className="font-display font-black text-xl uppercase tracking-wide text-gradient-gold leading-tight">
+          <h1 className="font-display font-bold text-2xl uppercase tracking-wider text-gradient-gold leading-tight">
             Madden<br />Drinks
           </h1>
         </div>

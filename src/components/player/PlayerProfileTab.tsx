@@ -59,7 +59,7 @@ export default function PlayerProfileTab({ state, playerId, onBack }: Props) {
 
       {/* Name + Share */}
       <div className="flex items-center gap-3 mb-4">
-        <h2 className="font-display font-black text-4xl text-text-primary">
+        <h2 className="font-display font-bold text-4xl text-text-primary">
           {player.name}
         </h2>
         {stats.totalGames > 0 && (

@@ -40,7 +40,7 @@ export default function ManageTab({ state, roomId, dispatch }: Props) {
           </span>
           <button
             onClick={copyLink}
-            className="text-xs font-display text-text-secondary hover:text-amber transition-colors px-3 py-1 rounded-xl border border-border hover:border-amber/40"
+            className="text-xs font-display text-text-secondary hover:text-amber transition-colors px-3 py-1 rounded-lg border border-border hover:border-amber/40"
           >
             {copied ? 'Copied!' : 'Copy link'}
           </button>
@@ -84,7 +84,7 @@ export default function ManageTab({ state, roomId, dispatch }: Props) {
         <div className="mb-6">
           <button
             onClick={undoLast}
-            className="w-full h-11 rounded-xl bg-bg-input border border-border text-text-secondary text-sm font-display font-semibold hover:border-amber/40 hover:text-amber transition-all active:scale-[0.98]"
+            className="w-full h-11 rounded-lg bg-bg-input border border-border text-text-secondary text-sm font-display font-semibold hover:border-amber/40 hover:text-amber transition-all active:scale-[0.98]"
           >
             Undo Last Game
           </button>
@@ -108,25 +108,25 @@ export default function ManageTab({ state, roomId, dispatch }: Props) {
         {!showReset ? (
           <button
             onClick={() => setShowReset(true)}
-            className="w-full h-11 rounded-xl border border-rose/30 text-rose text-sm font-semibold hover:bg-rose/10 transition-all"
+            className="w-full h-11 rounded-lg border border-rose/30 text-rose text-sm font-semibold hover:bg-rose/10 transition-all"
           >
             Reset League
           </button>
         ) : (
-          <div className="p-4 rounded-xl border border-rose/30 bg-rose/5">
+          <div className="p-4 rounded-lg border border-rose/30 bg-rose/5">
             <p className="text-sm text-text-secondary mb-3">
               This will delete all players, games, and stats. This cannot be undone.
             </p>
             <div className="flex gap-2">
               <button
                 onClick={() => setShowReset(false)}
-                className="flex-1 h-10 rounded-xl bg-bg-input border border-border text-text-secondary font-semibold text-sm"
+                className="flex-1 h-10 rounded-lg bg-bg-input border border-border text-text-secondary font-semibold text-sm"
               >
                 Cancel
               </button>
               <button
                 onClick={() => dispatch({ type: 'RESET_LEAGUE' })}
-                className="flex-1 h-10 rounded-xl bg-rose text-white font-display font-bold text-sm"
+                className="flex-1 h-10 rounded-lg bg-rose text-white font-display font-bold text-sm"
               >
                 Delete Everything
               </button>

@@ -64,16 +64,17 @@ export default function Lobby({ onJoin }: LobbyProps) {
   }
 
   return (
-    <div className="min-h-dvh flex items-center justify-center px-4 relative">
+    <div className="min-h-dvh flex items-center justify-center px-4 relative stripe-accent">
       {/* Ambient spotlight */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-amber/[0.03] rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-sm md:max-w-md lg:max-w-lg w-full text-center relative z-10">
         {/* Title */}
         <div className="mb-8 animate-slide-up" style={{ animationDelay: '0ms' }}>
-          <h1 className="text-5xl font-display font-black uppercase tracking-wide text-gradient-gold">
+          <h1 className="text-5xl font-display font-bold uppercase tracking-wider text-gradient-gold">
             Madden Drinks
           </h1>
+          <div className="w-16 h-[2px] bg-amber mx-auto mt-3 rounded-full" />
           <p className="section-label text-amber-muted mt-2">
             Lifetime Drinking Game Tracker
           </p>
@@ -122,7 +123,7 @@ export default function Lobby({ onJoin }: LobbyProps) {
         <div className="animate-slide-up" style={{ animationDelay: '100ms' }}>
           <button
             onClick={createRoom}
-            className="w-full h-14 rounded-xl btn-shimmer text-bg-primary font-display text-lg font-bold transition-all active:scale-[0.98] shadow-[0_0_24px_-6px] shadow-amber-glow mb-4"
+            className="w-full h-14 rounded-lg btn-shimmer text-bg-primary font-display text-lg font-bold transition-all active:scale-[0.98] shadow-[0_0_24px_-6px] shadow-amber-glow mb-4"
           >
             Create League
           </button>
@@ -137,7 +138,7 @@ export default function Lobby({ onJoin }: LobbyProps) {
             </p>
             <button
               onClick={copyLink}
-              className="text-xs text-text-secondary hover:text-amber transition-colors px-4 py-1.5 rounded-xl border border-border hover:border-amber/40"
+              className="text-xs text-text-secondary hover:text-amber transition-colors px-4 py-1.5 rounded-lg border border-border hover:border-amber/40"
             >
               {copied ? 'Copied!' : 'Copy invite link'}
             </button>
@@ -160,14 +161,14 @@ export default function Lobby({ onJoin }: LobbyProps) {
             onChange={(e) => setJoinCode(e.target.value.toUpperCase())}
             onKeyDown={(e) => e.key === 'Enter' && joinRoom()}
             placeholder="League code"
-            className="flex-1 h-12 px-4 rounded-xl bg-bg-input border border-border text-text-primary placeholder:text-text-muted outline-none focus:border-amber/50 focus:ring-1 focus:ring-amber/30 input-premium transition-all text-center font-display tracking-[0.3em] uppercase"
+            className="flex-1 h-12 px-4 rounded-lg bg-bg-input border border-border text-text-primary placeholder:text-text-muted outline-none focus:border-amber/50 focus:ring-1 focus:ring-amber/30 input-premium transition-all text-center font-display tracking-[0.3em] uppercase"
             style={{ fontSize: '16px' }}
             maxLength={6}
           />
           <button
             onClick={joinRoom}
             disabled={joinCode.trim().length < 2}
-            className="h-12 px-6 rounded-xl bg-amber text-bg-primary font-bold disabled:opacity-20 transition-all active:scale-95"
+            className="h-12 px-6 rounded-lg bg-amber text-bg-primary font-bold disabled:opacity-20 transition-all active:scale-95"
           >
             Join
           </button>

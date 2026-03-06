@@ -1,38 +1,38 @@
 @import "tailwindcss";
 
 @theme {
-  /* === Backgrounds === */
-  --color-bg-primary: #0C0C0E;
-  --color-bg-surface: #141416;
-  --color-bg-surface-hover: #1C1C1F;
-  --color-bg-input: #18181B;
-  --color-bg-elevated: #1E1E22;
-  --color-bg-spotlight: #201C16;
+  /* === Backgrounds: Cold blue-blacks === */
+  --color-bg-primary: #09090B;
+  --color-bg-surface: #111113;
+  --color-bg-surface-hover: #1A1A1E;
+  --color-bg-input: #0F0F12;
+  --color-bg-elevated: #1C1C20;
+  --color-bg-spotlight: #14120A;
 
-  /* === Borders === */
-  --color-border: #232328;
-  --color-border-bright: #3A3A42;
-  --color-border-warm: rgba(212, 160, 74, 0.18);
+  /* === Borders: Steel-gray === */
+  --color-border: #1F1F24;
+  --color-border-bright: #33333B;
+  --color-border-warm: rgba(255, 182, 18, 0.15);
 
-  /* === Accent Palette === */
-  --color-amber: #D4A04A;
-  --color-amber-glow: #D4A04A50;
-  --color-amber-muted: #B8893D;
-  --color-rose: #C45454;
-  --color-rose-glow: #C4545440;
-  --color-whiskey: #B87A3D;
-  --color-whiskey-glow: #B87A3D40;
-  --color-emerald: #4ADE80;
+  /* === Accent Palette: STEELERS GOLD === */
+  --color-amber: #FFB612;
+  --color-amber-glow: #FFB61250;
+  --color-amber-muted: #D99E00;
+  --color-rose: #E53E3E;
+  --color-rose-glow: #E53E3E40;
+  --color-whiskey: #F59E0B;
+  --color-whiskey-glow: #F59E0B40;
+  --color-emerald: #34D399;
 
-  /* === Text === */
-  --color-text-primary: #F0EDE8;
-  --color-text-secondary: #9B978F;
-  --color-text-tertiary: #7A756C;
-  --color-text-muted: #6B665E;
+  /* === Text: Cool zinc grays === */
+  --color-text-primary: #F4F4F5;
+  --color-text-secondary: #A1A1AA;
+  --color-text-tertiary: #71717A;
+  --color-text-muted: #52525B;
 
   /* === Fonts === */
-  --font-display: 'Barlow Condensed', sans-serif;
-  --font-body: 'Outfit', sans-serif;
+  --font-display: 'Teko', sans-serif;
+  --font-body: 'Inter', sans-serif;
 }
 
 html {
@@ -43,7 +43,8 @@ body {
   margin: 0;
   background-color: var(--color-bg-primary);
   background-image:
-    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(212, 160, 74, 0.04) 0%, transparent 60%);
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(255, 182, 18, 0.03) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 40% at 50% 100%, rgba(0, 0, 0, 0.4) 0%, transparent 60%);
   background-attachment: fixed;
   color: var(--color-text-primary);
   font-family: var(--font-body);
@@ -64,65 +65,65 @@ input[type="number"] {
   font-family: var(--font-display);
 }
 
-/* ---- Glass Card Surface ---- */
+/* ---- Glass Card Surface (Steel Plate) ---- */
 .card {
   background: var(--color-bg-surface);
   background-image: linear-gradient(
-    135deg,
+    180deg,
     rgba(255, 255, 255, 0.03) 0%,
-    transparent 40%,
-    rgba(0, 0, 0, 0.08) 100%
+    transparent 30%,
+    rgba(0, 0, 0, 0.12) 100%
   );
   border: 1px solid var(--color-border);
-  border-radius: 12px;
+  border-radius: 8px;
   box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 0.03) inset,
-    0 -1px 0 0 rgba(0, 0, 0, 0.15) inset,
-    0 2px 8px -2px rgba(0, 0, 0, 0.3);
+    0 1px 0 0 rgba(255, 255, 255, 0.04) inset,
+    0 -1px 0 0 rgba(0, 0, 0, 0.2) inset,
+    0 2px 12px -3px rgba(0, 0, 0, 0.5);
 }
 
 .card-interactive {
   background: var(--color-bg-surface);
   background-image: linear-gradient(
-    135deg,
+    180deg,
     rgba(255, 255, 255, 0.03) 0%,
-    transparent 40%,
-    rgba(0, 0, 0, 0.08) 100%
+    transparent 30%,
+    rgba(0, 0, 0, 0.12) 100%
   );
   border: 1px solid var(--color-border);
-  border-radius: 12px;
+  border-radius: 8px;
   box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 0.03) inset,
-    0 -1px 0 0 rgba(0, 0, 0, 0.15) inset,
-    0 2px 8px -2px rgba(0, 0, 0, 0.3);
+    0 1px 0 0 rgba(255, 255, 255, 0.04) inset,
+    0 -1px 0 0 rgba(0, 0, 0, 0.2) inset,
+    0 2px 12px -3px rgba(0, 0, 0, 0.5);
   transition: background-color 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 .card-interactive:hover {
   background-color: var(--color-bg-surface-hover);
   border-color: var(--color-border-bright);
   box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 0.04) inset,
-    0 4px 16px -4px rgba(0, 0, 0, 0.4);
+    0 1px 0 0 rgba(255, 255, 255, 0.05) inset,
+    0 4px 20px -4px rgba(0, 0, 0, 0.5);
   transform: translateY(-1px);
 }
 .card-interactive:active {
   transform: scale(0.985) translateY(0);
 }
 
-/* ---- Featured card with amber border glow ---- */
+/* ---- Featured card with gold border glow ---- */
 .card-featured {
   background: var(--color-bg-spotlight);
   background-image: linear-gradient(
-    135deg,
-    rgba(212, 160, 74, 0.04) 0%,
-    transparent 50%,
-    rgba(0, 0, 0, 0.1) 100%
+    180deg,
+    rgba(255, 182, 18, 0.05) 0%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.15) 100%
   );
-  border: 1px solid rgba(212, 160, 74, 0.2);
-  border-radius: 12px;
+  border: 1px solid rgba(255, 182, 18, 0.2);
+  border-radius: 8px;
   box-shadow:
-    0 1px 0 0 rgba(212, 160, 74, 0.06) inset,
-    0 0 20px -8px rgba(212, 160, 74, 0.15);
+    0 1px 0 0 rgba(255, 182, 18, 0.08) inset,
+    0 0 24px -8px rgba(255, 182, 18, 0.12);
 }
 
 /* ---- Tabular number display ---- */
@@ -135,17 +136,27 @@ input[type="number"] {
 /* ---- Jumbotron score ---- */
 .score-jumbo {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.02em;
+}
+
+/* ---- Scoreboard number with glow ---- */
+.score-scoreboard {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 20px rgba(255, 182, 18, 0.2);
 }
 
 /* ---- Section label ---- */
 .section-label {
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 11px;
+  font-weight: 600;
+  font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-text-muted);
@@ -153,8 +164,8 @@ input[type="number"] {
 
 .section-label-lg {
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 12px;
+  font-weight: 600;
+  font-size: 13px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-text-tertiary);
@@ -168,7 +179,7 @@ input[type="number"] {
 
 /* ---- Gradient gold text ---- */
 .text-gradient-gold {
-  background: linear-gradient(135deg, #D4A04A 0%, #E8C97A 50%, #D4A04A 100%);
+  background: linear-gradient(135deg, #FFB612 0%, #FFD54F 50%, #FFB612 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -181,7 +192,49 @@ input[type="number"] {
 
 /* ---- Premium input inner shadow ---- */
 .input-premium {
-  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2) inset;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.3) inset;
+}
+
+/* ---- Diagonal Steelers stripe accent ---- */
+.stripe-accent {
+  position: relative;
+  overflow: hidden;
+}
+.stripe-accent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -20px;
+  width: 80px;
+  height: 100%;
+  background: repeating-linear-gradient(
+    -55deg,
+    transparent,
+    transparent 6px,
+    rgba(255, 182, 18, 0.04) 6px,
+    rgba(255, 182, 18, 0.04) 12px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---- Steel grain overlay ---- */
+.steel-grain {
+  position: relative;
+}
+.steel-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23noise)' opacity='0.015'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* ---- Gold top-border accent ---- */
+.gold-bar {
+  border-top: 3px solid var(--color-amber);
 }
 
 /* ===== Animations ===== */
@@ -228,6 +281,15 @@ input[type="number"] {
   animation: score-bump 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+@keyframes score-reveal {
+  0% { transform: scale(0.3) rotateX(60deg); opacity: 0; filter: blur(4px); }
+  50% { transform: scale(1.1) rotateX(-5deg); opacity: 1; filter: blur(0); }
+  100% { transform: scale(1) rotateX(0); opacity: 1; filter: blur(0); }
+}
+.animate-score-reveal {
+  animation: score-reveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 @keyframes tab-indicator-enter {
   from { transform: scaleX(0); opacity: 0; }
   to { transform: scaleX(1); opacity: 1; }
@@ -247,7 +309,7 @@ input[type="number"] {
 
 @keyframes pulse-glow {
   0%, 100% { box-shadow: 0 0 0 0 var(--color-amber-glow); }
-  50% { box-shadow: 0 0 0 10px transparent; }
+  50% { box-shadow: 0 0 0 12px transparent; }
 }
 .animate-pulse-glow {
   animation: pulse-glow 1.5s ease-in-out infinite;
@@ -317,14 +379,26 @@ input[type="number"] {
   background-image: linear-gradient(
     90deg,
     var(--color-amber) 0%,
-    #E8C97A 25%,
+    #FFD54F 25%,
     var(--color-amber) 50%,
-    #E8C97A 75%,
+    #FFD54F 75%,
     var(--color-amber) 100%
   );
 }
 .btn-shimmer:hover {
   animation: shimmer 2s linear infinite;
+}
+
+@keyframes scoreboard-flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.7; }
+  94% { opacity: 1; }
+  97% { opacity: 0.8; }
+  98% { opacity: 1; }
+}
+.animate-scoreboard-flicker {
+  animation: scoreboard-flicker 3s ease-in-out infinite;
 }
 
 /* ---- Scrollbar hiding ---- */

@@ -24,7 +24,7 @@ export default function LeagueSetup({ players, dispatch }: Props) {
 
   return (
     <div className="max-w-md mx-auto px-4 pt-6 pb-28">
-      <h2 className="font-display font-black text-4xl uppercase tracking-wide text-center mb-1 animate-slide-up text-gradient-gold">
+      <h2 className="font-display font-bold text-4xl uppercase tracking-wider text-center mb-1 animate-slide-up text-gradient-gold">
         New League
       </h2>
       <p className="text-text-secondary text-sm text-center mb-8 animate-slide-up" style={{ animationDelay: '60ms' }}>
@@ -39,7 +39,7 @@ export default function LeagueSetup({ players, dispatch }: Props) {
           value={leagueName}
           onChange={(e) => setLeagueName(e.target.value)}
           placeholder="e.g. Sunday Madden League"
-          className="w-full h-12 px-4 rounded-xl bg-bg-input border border-border text-text-primary placeholder:text-text-muted outline-none focus:border-amber/50 focus:ring-1 focus:ring-amber/30 input-premium transition-all"
+          className="w-full h-12 px-4 rounded-lg bg-bg-input border border-border text-text-primary placeholder:text-text-muted outline-none focus:border-amber/50 focus:ring-1 focus:ring-amber/30 input-premium transition-all"
           style={{ fontSize: '16px' }}
           maxLength={30}
         />
@@ -55,14 +55,14 @@ export default function LeagueSetup({ players, dispatch }: Props) {
             onChange={(e) => setName(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && addPlayer()}
             placeholder="Player name"
-            className="flex-1 h-12 px-4 rounded-xl bg-bg-input border border-border text-text-primary placeholder:text-text-muted outline-none focus:border-amber/50 focus:ring-1 focus:ring-amber/30 input-premium transition-all"
+            className="flex-1 h-12 px-4 rounded-lg bg-bg-input border border-border text-text-primary placeholder:text-text-muted outline-none focus:border-amber/50 focus:ring-1 focus:ring-amber/30 input-premium transition-all"
             style={{ fontSize: '16px' }}
             maxLength={20}
           />
           <button
             onClick={addPlayer}
             disabled={!name.trim()}
-            className="h-12 px-5 rounded-xl bg-amber text-bg-primary font-bold disabled:opacity-20 transition-all active:scale-95"
+            className="h-12 px-5 rounded-lg bg-amber text-bg-primary font-bold disabled:opacity-20 transition-all active:scale-95"
           >
             Add
           </button>
@@ -105,7 +105,7 @@ export default function LeagueSetup({ players, dispatch }: Props) {
       <button
         onClick={activate}
         disabled={players.length < 2 || !leagueName.trim()}
-        className="w-full h-14 rounded-xl btn-shimmer text-bg-primary text-lg font-display font-bold transition-all active:scale-[0.98] disabled:opacity-20 shadow-[0_0_24px_-6px] shadow-amber-glow"
+        className="w-full h-14 rounded-lg btn-shimmer text-bg-primary text-lg font-display font-bold transition-all active:scale-[0.98] disabled:opacity-20 shadow-[0_0_24px_-6px] shadow-amber-glow"
       >
         Start League
       </button>

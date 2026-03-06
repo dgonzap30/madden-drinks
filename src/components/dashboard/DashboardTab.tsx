@@ -27,21 +27,21 @@ export default function DashboardTab({ state, dispatch, onSelectPlayer, onNaviga
       <h2 className="font-display font-bold text-2xl mb-0.5 text-text-primary">
         {state.leagueName}
       </h2>
-      <div className="w-12 h-0.5 bg-amber/40 rounded-full mb-4" />
+      <div className="w-16 h-0.5 bg-amber/40 rounded-full mb-4" />
 
       {/* Quick Stats */}
       <div className="flex gap-3 mb-6">
-        <div className="flex-1 p-3 card text-center border-t-2 border-amber">
+        <div className="flex-1 p-3 card text-center border-t-[3px] border-amber">
           <div className="score-jumbo text-3xl text-amber pt-1">{totalGamesPlayed}</div>
           <div className="section-label mt-0.5">Games</div>
         </div>
-        <div className="flex-1 p-3 card text-center border-t-2 border-whiskey">
+        <div className="flex-1 p-3 card text-center border-t-[3px] border-whiskey">
           <div className="score-jumbo text-3xl text-whiskey pt-1">
             {totalDrinksConsumed}<span className="text-text-tertiary text-xs">/{totalDrinksOwed}</span>
           </div>
           <div className="section-label mt-0.5">Shots</div>
         </div>
-        <div className="flex-1 p-3 card text-center border-t-2 border-text-muted">
+        <div className="flex-1 p-3 card text-center border-t-[3px] border-text-muted">
           <div className="score-jumbo text-3xl text-text-secondary pt-1">{state.players.length}</div>
           <div className="section-label mt-0.5">Players</div>
         </div>
@@ -53,7 +53,7 @@ export default function DashboardTab({ state, dispatch, onSelectPlayer, onNaviga
           <p className="text-text-primary font-semibold mb-1">Ready to play?</p>
           <p className="text-text-tertiary text-xs mb-3">Log your first Madden game and start tracking</p>
           {onNavigateToLog && (
-            <button onClick={onNavigateToLog} className="px-5 py-2 rounded-xl bg-amber text-bg-primary text-sm font-display font-bold">
+            <button onClick={onNavigateToLog} className="px-5 py-2 rounded-lg bg-amber text-bg-primary text-sm font-display font-bold">
               Log First Game
             </button>
           )}

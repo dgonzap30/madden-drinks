@@ -71,7 +71,7 @@ function ScoreField({
             if (!isNaN(n) && n >= 0) onChange(n)
           }}
           placeholder="0"
-          className={`flex-1 h-20 text-4xl score-jumbo text-center rounded-xl bg-bg-primary border border-border outline-none input-premium transition-all focus:border-amber/60 focus:ring-1 focus:ring-amber/30 ${
+          className={`flex-1 h-20 text-4xl score-jumbo text-center rounded-lg bg-bg-primary border border-border outline-none input-premium transition-all focus:border-amber/60 focus:ring-1 focus:ring-amber/30 ${
             isWinning ? 'text-amber' : isLosing ? 'text-rose' : ''
           }`}
           style={!isWinning && !isLosing ? { color: 'var(--color-text-primary)' } : undefined}
